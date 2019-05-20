@@ -7,9 +7,6 @@ HERE = pathlib.Path(__file__).parent
 # The text of the README file
 README = (HERE / "README.md").read_text()
 LICENSE = (HERE / "LICENSE").read_text()
-
-with open(HERE /'requirements.txt') as f:
-    REQUIREMENTS = f.read().splitlines()
     
 setup(name="qapedia",
       version="0.1.0",
@@ -21,5 +18,6 @@ setup(name="qapedia",
       author_email="jessicasousa.pc@gmail.com",
       license=LICENSE,
       packages=find_packages(),
-      install_requires = REQUIREMENTS,
+      install_requires = ["SPARQLWrapper"],
+      tests_require = ['pytest'],
       zip_safe=False)
