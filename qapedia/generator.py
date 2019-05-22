@@ -175,8 +175,8 @@ def get_results_of_generator_query(generator_query, variables,
 
 
 def extract_pairs(results, template, number_of_examples=600):
-    """Realiza a extração do conjunto de pares e sparql correspondentes 
-    obtidos pelo método 
+    """Realiza a extração do conjunto de pares  de questão-sparql
+    correspondentes obtidos pelo método 
     :func:`qapedia.generator.get_results_of_generator_query`.
 
     Parameters

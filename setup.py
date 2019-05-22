@@ -1,23 +1,25 @@
-import pathlib
 from setuptools import setup, find_packages
+from os import path
 
 # The directory containing this file
-HERE = pathlib.Path(__file__).parent
+this_directory = path.abspath(path.dirname(__file__))
 
-# The text of the README file
-README = (HERE / "README.md").read_text()
-LICENSE = (HERE / "LICENSE").read_text()
+with open(path.join(this_directory, 'README.md')) as f:
+    long_description = f.read()
+    
+with open(path.join(this_directory, 'LICENSE')) as f:
+    license = f.read()
     
 setup(name="qapedia",
       version="0.1.0",
       description="",
-      long_description=README,
+      long_description=long_description,
       long_description_content_type="text/markdown",
       url="https://github.com/JessicaSousa/qapedia",
       author="Jessica Sousa",
       author_email="jessicasousa.pc@gmail.com",
-      license=LICENSE,
+      license=license,
       packages=find_packages(),
-      install_requires = ["SPARQLWrapper"],
+      install_requires = ["SPARQLWrapper", "pandas"],
       tests_require = ['pytest'],
       zip_safe=False)
