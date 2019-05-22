@@ -58,7 +58,7 @@ def adjust_generator_query(generator_query, variables, lang="pt"):
     ``rdfs:label`` correspondente as variáveis que se deseja obter
     informações.
 
-        .. code-block:: python
+    .. code-block:: python
 
         >>> generator_query = "select distinct(?a) WHERE { ?a dbo:abstract []}"
         >>> variables = ['a']
