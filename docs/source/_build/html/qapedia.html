@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qapedia package &mdash; documentação qapedia 0.1.0</title>
+  <title>qapedia package &mdash; documentação qapedia 0.1</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/copybutton.js"></script>
         <script type="text/javascript" src="_static/translations.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
@@ -36,7 +37,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Buscar" href="search.html" />
-    <link rel="prev" title="qapedia" href="modules.html" /> 
+    <link rel="prev" title="1. Sobre o QApedia" href="intro.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,11 +81,14 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">Sumário</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">1. Sobre o <strong>QApedia</strong></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Pacote</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">qapedia</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">qapedia package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">qapedia package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modulos">Módulos</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-qapedia.generator">qapedia.generator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-qapedia.io">qapedia.io module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-qapedia.utils">qapedia.utils module</a></li>
@@ -138,8 +142,6 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-          <li><a href="modules.html">qapedia</a> &raquo;</li>
-        
       <li>qapedia package</li>
     
     
@@ -161,46 +163,62 @@
             
   <div class="section" id="qapedia-package">
 <h1>qapedia package<a class="headerlink" href="#qapedia-package" title="Link permanente para este título">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link permanente para este título">¶</a></h2>
-</div>
+<div class="section" id="modulos">
+<h2>Módulos<a class="headerlink" href="#modulos" title="Link permanente para este título">¶</a></h2>
 <div class="section" id="module-qapedia.generator">
-<span id="qapedia-generator-module"></span><h2>qapedia.generator module<a class="headerlink" href="#module-qapedia.generator" title="Link permanente para este título">¶</a></h2>
-<p>Generator Module</p>
-<p>Este script permite ao usuário realizar buscas sobre o endpoint da
-dbpedia. Além disso, permite ao usuário realizar a construção de
-queries sparql dado um template previamente especificado.</p>
-<p>Este arquivo pode ser importado como um module e contém as seguintes
+<span id="qapedia-generator-module"></span><h3>qapedia.generator module<a class="headerlink" href="#module-qapedia.generator" title="Link permanente para este título">¶</a></h3>
+<p>O módulo <code class="docutils literal notranslate"><span class="pre">generator</span></code> permite ao usuário realizar buscas sobre o
+endpoint da dbpedia. Além disso, permite ao usuário realizar a
+construção de queries sparql dado um template previamente especificado.</p>
+<p>Este arquivo pode ser importado como um módulo e contém as seguintes
 funções:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>adjust_generator_query - retorna a <code class="docutils literal notranslate"><span class="pre">`generator_query`</span></code> com os rótulos correspondente a cada variável.</p></li>
-<li><p>perform_query - realiza a execução da query no endpoint da dbpedia.</p></li>
-<li><p>get_results_of_generator_query - idem a função <code class="docutils literal notranslate"><span class="pre">`perform_query`</span></code>, sendo a diferença, que essa armazena o resultado da última busca caso exista.</p></li>
-<li><p>extract_pairs - realiza a construção dos pares de questão-sparql com base no resultado e template especificados.</p></li>
+<li><p>adjust_generator_query - retorna a <code class="docutils literal notranslate"><span class="pre">generator_query</span></code> com os
+rótulos correspondente a cada variável.</p></li>
+<li><p>perform_query - realiza a execução da query no endpoint da
+dbpedia.</p></li>
+<li><p>get_results_of_generator_query - idem a função <code class="docutils literal notranslate"><span class="pre">perform_query</span></code>,
+sendo a diferença, que essa armazena o resultado da última
+busca caso exista.</p></li>
+<li><p>extract_pairs - realiza a construção dos pares de questão-sparql
+com base no resultado e template especificados.</p></li>
 </ul>
 </div></blockquote>
 <dl class="function">
 <dt id="qapedia.generator.adjust_generator_query">
-<code class="descclassname">qapedia.generator.</code><code class="descname">adjust_generator_query</code><span class="sig-paren">(</span><em>generator_query</em>, <em>variables</em><span class="sig-paren">)</span><a class="headerlink" href="#qapedia.generator.adjust_generator_query" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Dada uma <code class="docutils literal notranslate"><span class="pre">`generator_query`</span></code> é retornada uma versão contendo os labels
-que são utilizados para preencher as lacunas presentes na pergunta.</p>
+<code class="descclassname">qapedia.generator.</code><code class="descname">adjust_generator_query</code><span class="sig-paren">(</span><em>generator_query</em>, <em>variables</em>, <em>lang='pt'</em><span class="sig-paren">)</span><a class="headerlink" href="#qapedia.generator.adjust_generator_query" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Dada uma <code class="docutils literal notranslate"><span class="pre">`generator_query`</span></code> é retornada uma versão contendo
+os labels que são utilizados para preencher as lacunas presentes na
+pergunta.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>generator_query</strong> (<em>str</em>) – Query utilizada para geração dos pares de questão-sparql.</p></li>
-<li><p><strong>variables</strong> (<em>list</em>) – Lista contendo as variáveis utilizadas nas lacunas da questão-sparql.</p></li>
+<li><p><strong>variables</strong> (<em>list</em>) – Lista contendo as variáveis utilizadas nas lacunas da
+questão-sparql.</p></li>
+<li><p><strong>lang</strong> (<em>str</em><em>, </em><em>optional</em>) – Idioma do campo <code class="docutils literal notranslate"><span class="pre">rdfs:label</span></code> adicionado na
+<code class="docutils literal notranslate"><span class="pre">generator_query</span></code>. O valor padrão é “pt”.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>Retorna a <cite>generator_query</cite> com os campos <cite>labels</cite> de cada variável.</p>
+<dd class="field-even"><p>Retorna a <cite>generator_query</cite> com os campos <cite>labels</cite> de cada
+variável.</p>
 </dd>
 <dt class="field-odd">Tipo de retorno</dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 <p class="rubric">Exemplos</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">generator_query</span> <span class="o">=</span> <span class="s2">&quot;select distinct(?a) WHERE { ?a dbo:abstract [] }&quot;</span>
+<p>No exemplo a seguir, temos a <code class="docutils literal notranslate"><span class="pre">generator_query</span></code> que será utilizada
+futuramente para retornar recursos que tenham o campo
+<code class="docutils literal notranslate"><span class="pre">dbo:abstract</span></code>. O resultado dela é usado para preencher as
+lacunas do seguinte par (<code class="docutils literal notranslate"><span class="pre">&quot;o</span> <span class="pre">que</span> <span class="pre">é</span> <span class="pre">&lt;A&gt;?&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;select</span> <span class="pre">?a</span> <span class="pre">where</span> <span class="pre">{</span>
+<span class="pre">&lt;A&gt;</span> <span class="pre">dbo:abstract</span> <span class="pre">?a</span> <span class="pre">&quot;</span></code>). Para preencher a lacuna da pergunta em
+linguagem natural, é adicionada na <code class="docutils literal notranslate"><span class="pre">generator_query</span></code> o campo
+<code class="docutils literal notranslate"><span class="pre">rdfs:label</span></code> correspondente as variáveis que se deseja obter
+informações.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">generator_query</span> <span class="o">=</span> <span class="s2">&quot;select distinct(?a) WHERE { ?a dbo:abstract [] }&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">adjust_generator_query</span><span class="p">(</span><span class="n">generator_query</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
@@ -212,31 +230,33 @@ que são utilizados para preencher as lacunas presentes na pergunta.</p>
 <dl class="function">
 <dt id="qapedia.generator.extract_pairs">
 <code class="descclassname">qapedia.generator.</code><code class="descname">extract_pairs</code><span class="sig-paren">(</span><em>results</em>, <em>template</em>, <em>number_of_examples=600</em><span class="sig-paren">)</span><a class="headerlink" href="#qapedia.generator.extract_pairs" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Realiza a extração do conjunto de pares e sparql correspondentes,
-obtidos do método <a class="reference internal" href="#qapedia.generator.get_results_of_generator_query" title="qapedia.generator.get_results_of_generator_query"><code class="xref py py-func docutils literal notranslate"><span class="pre">qapedia.generator.get_results_of_generator_query()</span></code></a>.</p>
+<dd><p>Realiza a extração do conjunto de pares e sparql correspondentes
+obtidos pelo método
+<a class="reference internal" href="#qapedia.generator.get_results_of_generator_query" title="qapedia.generator.get_results_of_generator_query"><code class="xref py py-func docutils literal notranslate"><span class="pre">qapedia.generator.get_results_of_generator_query()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>results</strong> (<em>list</em>) – Resultado obtido após a execução da query, [“results”][“bindings”]</p></li>
+<li><p><strong>results</strong> (<em>list</em>) – Resultado obtido após a execução da query, [“results”]
+[“bindings”]</p></li>
 <li><p><strong>template</strong> (<em>dict</em>) – Corresponde ao template utilizado para geração dos resultados.</p></li>
-<li><p><strong>number_of_examples</strong> (<em>int</em><em>, </em><em>optional</em>) – Número de resultados a serem consideradas para o template, padrão 600.</p></li>
+<li><p><strong>number_of_examples</strong> (<em>int</em><em>, </em><em>optional</em>) – Número de resultados a serem considerados para o template,
+padrão 600.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>Lista contendo os pares <code class="docutils literal notranslate"><span class="pre">`sparql`</span></code>-<code class="docutils literal notranslate"><span class="pre">`question`</span></code> do template.</p>
+<dd class="field-even"><p>Lista contendo os pares <code class="docutils literal notranslate"><span class="pre">sparql</span></code>-<code class="docutils literal notranslate"><span class="pre">question</span></code> do template.</p>
 </dd>
 <dt class="field-odd">Tipo de retorno</dt>
 <dd class="field-odd"><p>list</p>
 </dd>
 </dl>
 <p class="rubric">Exemplos</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qapedia.generator</span> <span class="k">import</span> <span class="n">extract_pairs</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qapedia.generator</span> <span class="kn">import</span> <span class="n">extract_pairs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">template</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Yoshihiro Togashi escreveu &lt;A&gt;?&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;ask where{ dbr:Yoshihiro_Togashi ^  dbo:author &lt;A&gt;}&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;generator_query&quot;</span><span class="p">:</span> <span class="s2">&quot;select ?a where{ dbr:Yoshihiro_Togashi ^  dbo:author ?a }&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;variables&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">perform_query</span><span class="p">(</span><span class="s2">&quot;select ?a ?la where{ dbr:Yoshihiro_Togashi ^  dbo:author ?a . ?a</span>
-<span class="go">rdfs:label ?la . FILTER(lang(?la) = &#39;en&#39;).}&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">perform_query</span><span class="p">(</span><span class="s2">&quot;select ?a ?la where{ dbr:Yoshihiro_Togashi ^  dbo:author ?a . ?a rdfs:label ?la . FILTER(lang(?la) = &#39;en&#39;).}&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">extract_pairs</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">],</span> <span class="n">template</span><span class="p">)</span>
 <span class="go">[{&#39;sparql&#39;: &#39;ask where brack_open  dbr_Yoshihiro_Togashi ^  dbo_author dbr_Hunter_×_Hunter brack_close &#39;, &#39;questi</span>
 <span class="go">on&#39;: &#39;Yoshihiro Togashi escreveu Hunter × Hunter?&#39;}, {&#39;sparql&#39;: &#39;ask where brack_open  dbr_Yoshihiro_Togashi ^  d</span>
@@ -250,19 +270,21 @@ obtidos do método <a class="reference internal" href="#qapedia.generator.get_re
 
 <dl class="function">
 <dt id="qapedia.generator.get_results_of_generator_query">
-<code class="descclassname">qapedia.generator.</code><code class="descname">get_results_of_generator_query</code><span class="sig-paren">(</span><em>generator_query</em>, <em>variables</em>, <em>endpoint</em><span class="sig-paren">)</span><a class="headerlink" href="#qapedia.generator.get_results_of_generator_query" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Dada uma <code class="docutils literal notranslate"><span class="pre">`generator_query`</span></code> é retornado um conjunto de resultados
-obtidos ao executar a query no endpoint especificado.</p>
+<code class="descclassname">qapedia.generator.</code><code class="descname">get_results_of_generator_query</code><span class="sig-paren">(</span><em>generator_query</em>, <em>variables</em>, <em>endpoint</em>, <em>lang='pt'</em><span class="sig-paren">)</span><a class="headerlink" href="#qapedia.generator.get_results_of_generator_query" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Dada uma <code class="docutils literal notranslate"><span class="pre">`generator_query`</span></code> é retornado um conjunto de
+resultados obtidos ao executar a query no endpoint especificado.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>generator_query</strong> (<em>str</em>) – String representando a <code class="docutils literal notranslate"><span class="pre">`generator_query`</span></code>.</p></li>
 <li><p><strong>variables</strong> (<em>list</em>) – Lista de caracteres correspondendo as variáveis.</p></li>
 <li><p><strong>endpoint</strong> (<em>str</em>) – Indica endpoint utilizado.</p></li>
+<li><p><strong>lang</strong> (<em>str</em><em>, </em><em>optional</em>) – Idioma do campo <code class="docutils literal notranslate"><span class="pre">rdfs:label</span></code> adicionado na
+<code class="docutils literal notranslate"><span class="pre">generator_query</span></code>. O valor padrão é “pt”.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>Corresponde a um dicionário contendo os <code class="docutils literal notranslate"><span class="pre">`head`</span></code> e <code class="docutils literal notranslate"><span class="pre">`results`</span></code>
+<dd class="field-even"><p>Corresponde a um dicionário contendo os <code class="docutils literal notranslate"><span class="pre">head</span></code> e <code class="docutils literal notranslate"><span class="pre">results</span></code>
 retornados pela busca Sparql.</p>
 </dd>
 <dt class="field-odd">Tipo de retorno</dt>
@@ -274,26 +296,27 @@ retornados pela busca Sparql.</p>
 <dl class="function">
 <dt id="qapedia.generator.perform_query">
 <code class="descclassname">qapedia.generator.</code><code class="descname">perform_query</code><span class="sig-paren">(</span><em>query</em>, <em>endpoint='http://dbpedia.org/sparql'</em><span class="sig-paren">)</span><a class="headerlink" href="#qapedia.generator.perform_query" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Dada uma query sparql retorna um dicionário correspondendo ao resultado
-da pesquisa.</p>
+<dd><p>Dada uma query sparql retorna um dicionário correspondendo ao
+resultado da pesquisa.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>query</strong> (<em>str</em>) – Sparql utilizada para realizar uma busca no endpoint especificado.</p></li>
-<li><p><strong>endpoint</strong> (<em>str</em><em>, </em><em>optional</em>) – Indica endpoint utilizado, o valor default é ‘<a class="reference external" href="http://dbpedia.org/sparql">http://dbpedia.org/sparql</a>’</p></li>
+<li><p><strong>query</strong> (<em>str</em>) – Sparql utilizada para realizar uma busca no endpoint
+especificado.</p></li>
+<li><p><strong>endpoint</strong> (<em>str</em><em>, </em><em>optional</em>) – Indica endpoint utilizado, o valor default é
+<code class="docutils literal notranslate"><span class="pre">http://dbpedia.org/sparql</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>Corresponde a um dicionário contendo os <code class="docutils literal notranslate"><span class="pre">`results`</span></code> e <code class="docutils literal notranslate"><span class="pre">`bindinds`</span></code>
-retornados pela busca Sparql.</p>
+<dd class="field-even"><p>Corresponde a um dicionário contendo os <code class="docutils literal notranslate"><span class="pre">results</span></code> e
+<code class="docutils literal notranslate"><span class="pre">bindinds</span></code> retornados pela busca Sparql.</p>
 </dd>
 <dt class="field-odd">Tipo de retorno</dt>
 <dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 <p class="rubric">Exemplos</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * WHERE { ?manga a dbo:Manga . ?manga rdfs:label ?nome_manga . ?manga dbo:author dbr:Yoshihir</span>
-<span class="go">o_Togashi . FILTER(lang(?nome_manga) = &#39;pt&#39;).}&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * WHERE { ?manga a dbo:Manga . ?manga rdfs:label ?nome_manga . ?manga dbo:author dbr:Yoshihiro_Togashi . FILTER(lang(?nome_manga) = &#39;pt&#39;).}&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">perform_query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 <span class="go">{&#39;head&#39;: {&#39;link&#39;: [], &#39;vars&#39;: [&#39;manga&#39;, &#39;nome_manga&#39;]}, &#39;results&#39;: {&#39;distinct&#39;: False, &#39;ordered&#39;: True, &#39;bindings</span>
 <span class="go">&#39;: [{&#39;manga&#39;: {&#39;type&#39;: &#39;uri&#39;, &#39;value&#39;: &#39;http://dbpedia.org/resource/Level_E&#39;}, &#39;nome_manga&#39;: {&#39;type&#39;: &#39;literal&#39;,</span>
@@ -307,7 +330,17 @@ retornados pela busca Sparql.</p>
 
 </div>
 <div class="section" id="module-qapedia.io">
-<span id="qapedia-io-module"></span><h2>qapedia.io module<a class="headerlink" href="#module-qapedia.io" title="Link permanente para este título">¶</a></h2>
+<span id="qapedia-io-module"></span><h3>qapedia.io module<a class="headerlink" href="#module-qapedia.io" title="Link permanente para este título">¶</a></h3>
+<p>Este script trata das operações relacionadas a leitura e escrita do
+pacote <code class="docutils literal notranslate"><span class="pre">qapedia</span></code>.</p>
+<p>Este arquivo tem as seguintes funções:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>load_templates - realiza a leitura do arquivo contendo o conjunto de</dt><dd><p>templates utilizados para a geração de perguntas-queries.</p>
+</dd>
+</dl>
+</li>
+</ul>
 <dl class="function">
 <dt id="qapedia.io.load_templates">
 <code class="descclassname">qapedia.io.</code><code class="descname">load_templates</code><span class="sig-paren">(</span><em>filepath</em>, <em>delimiter=';'</em><span class="sig-paren">)</span><a class="headerlink" href="#qapedia.io.load_templates" title="Link permanente para esta definição">¶</a></dt>
@@ -333,7 +366,7 @@ em ‘question’ e ‘query’.
 </dd>
 </dl>
 <p class="rubric">Exemplos</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span> <span class="o">=</span> <span class="n">load_templates</span><span class="p">(</span><span class="s1">&#39;/home/jeca/Downloads/NSpMQueryTemplatesPT.csv&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span> <span class="o">=</span> <span class="n">load_templates</span><span class="p">(</span><span class="s1">&#39;/home/jeca/Downloads/NSpMQueryTemplatesPT.csv&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">templates</span><span class="p">)</span>
 <span class="go">200</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
@@ -347,7 +380,7 @@ em ‘question’ e ‘query’.
 
 </div>
 <div class="section" id="module-qapedia.utils">
-<span id="qapedia-utils-module"></span><h2>qapedia.utils module<a class="headerlink" href="#module-qapedia.utils" title="Link permanente para este título">¶</a></h2>
+<span id="qapedia-utils-module"></span><h3>qapedia.utils module<a class="headerlink" href="#module-qapedia.utils" title="Link permanente para este título">¶</a></h3>
 <dl class="function">
 <dt id="qapedia.utils.extract_elements">
 <code class="descclassname">qapedia.utils.</code><code class="descname">extract_elements</code><span class="sig-paren">(</span><em>line</em>, <em>fields</em><span class="sig-paren">)</span><a class="headerlink" href="#qapedia.utils.extract_elements" title="Link permanente para esta definição">¶</a></dt>
@@ -367,7 +400,7 @@ em ‘question’ e ‘query’.
 </dd>
 </dl>
 <p class="rubric">Exemplos</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;question&#39;</span><span class="p">,</span><span class="s1">&#39;query&#39;</span><span class="p">,</span><span class="s1">&#39;generator_query&#39;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;question&#39;</span><span class="p">,</span><span class="s1">&#39;query&#39;</span><span class="p">,</span><span class="s1">&#39;generator_query&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&lt;A&gt; escreveu qual livro?&#39;</span><span class="p">,</span>
 <span class="gp">... </span><span class="s1">&#39;SELECT DISTINCT ?uri where { ?uri &lt;http://dbpedia.org/ontology/author&gt; &lt;A&gt; }&#39;</span><span class="p">,</span>
 <span class="gp">... </span><span class="s1">&#39;select distinct ?a where { ?uri &lt;http://dbpedia.org/ontology/author&gt; ?a }&#39;</span><span class="p">]</span>
@@ -396,9 +429,9 @@ as variáveis presente nas lacunas da pergunta(<code class="docutils literal not
 </dd>
 </dl>
 <p class="rubric">Exemplos</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">generator_query</span> <span class="o">=</span> <span class="s2">&quot;select distinct ?a where { ?uri &lt;http://dbpedia.org/ontology/author&gt; ?a }&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">generator_query</span> <span class="o">=</span> <span class="s2">&quot;select distinct ?a where { ?uri &lt;http://dbpedia.org/ontology/author&gt; ?a }&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">variables</span> <span class="o">=</span> <span class="n">extract_variables</span><span class="p">(</span><span class="n">generator_query</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
 <span class="go">[&#39;a&#39;]</span>
 </pre></div>
 </div>
@@ -406,7 +439,8 @@ as variáveis presente nas lacunas da pergunta(<code class="docutils literal not
 
 </div>
 <div class="section" id="module-qapedia">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qapedia" title="Link permanente para este título">¶</a></h2>
+<span id="module-contents"></span><h3>Module contents<a class="headerlink" href="#module-qapedia" title="Link permanente para este título">¶</a></h3>
+</div>
 </div>
 </div>
 
@@ -419,7 +453,7 @@ as variáveis presente nas lacunas da pergunta(<code class="docutils literal not
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="modules.html" class="btn btn-neutral float-left" title="qapedia" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="intro.html" class="btn btn-neutral float-left" title="1. Sobre o QApedia" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

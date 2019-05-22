@@ -1,8 +1,9 @@
+****************
 qapedia package
-===============
+****************
 
-Submodules
-----------
+Módulos
+========
 
 qapedia.generator module
 ------------------------

@@ -4,48 +4,53 @@ pacote ``qapedia``.
 Este arquivo tem as seguintes funções:
 
 * load_templates - realiza a leitura do arquivo contendo o conjunto de
-    templates utilizados para a geração de perguntas-queries.
+  templates utilizados para a geração de perguntas-queries.
 """
-from qapedia.utils import extract_elements
-from csv import reader as csv_reader
-
+from qapedia.utils import extract_variables
+import pandas as pd
 
 def load_templates(filepath, delimiter=';'):
     """A função load_templates, carrega o conjunto de templates a partir de um
-    arquivo csv.
-
+    arquivo csv. O dado deve possuir um campo ``generator_query`` que servirá
+    para realizar buscas que preencherão as lacunas presentes nos campos
+    ``question`` e ``query``.
+    
     Parameters
     ----------
     filepath : str
         Caminho do arquivo csv que contém os templates.
     delimiter : str, optional
         Indicar qual separador utilizado no arquivo, by default ';'
-
+    
     Returns
     -------
-    list
-        Retorna uma lista contendo os campos extraídos do arquivo:
-        * question: pergunta em linguagem natural.
-        * query: query correspondente a pergunta.
-        * generator_query: query utilizada para preencher as lacunas presentes
-        em 'question' e 'query'.
-        * variables: corresponde as variáveis das lacunas.
-
+    pd.DataFrame
+        Retorna um dataframe contendo o conjunto de templates.
+        
     Examples
     --------
-    >>> templates = load_templates('/home/jeca/Downloads/NSpMQueryTemplatesPT.csv')
-    >>> len(templates)
-    200
-    >>> templates[7]
-    {'question': '<A> e <B> podem ser encontrados em qual país?', 'query': 'SELECT DISTINCT ?uri where { <A> <http://
-    dbpedia.org/ontology/locationCountry> ?uri . <B> <http://dbpedia.org/ontology/locationCountry> ?uri }', 'generato
-    r_query': 'select distinct ?a, ?b where { ?a <http://dbpedia.org/ontology/locationCountry> ?uri . ?b <http://dbpe
-    dia.org/ontology/locationCountry> ?uri }', 'variables': ['a', 'b']}
-    """
-    fields = ["question", "query", "generator_query"]
-    def extract_values(line): return extract_elements(line, fields)
+    Exemplo contendo 14 templates sendo carregado através da função
+    load_templates.
+    
+    .. code-block:: python
+    
+        >>> from qapedia.io import load_templates
+        >>> filename = "sample.csv"
+        >>> templates = load_templates(filename)
+        >>> len(templates)
+        14
+        >>> templates.head()
+                                                    query  ... variables
+        0  <A> e <B> são os municípios vizinhos de que lu...  ...    [a, b]
+        1                <A> e <B> pertencem a qual espécie?  ...    [a, b]
+        2      <A> e <B> podem ser encontrados em qual país?  ...    [a, b]
+        3            <A> e <B> é produzido por qual empresa?  ...    [a, b]
+        4      <A> e <B> é o trabalho notável de qual autor?  ...    [a, b]
 
-    with open(filepath, mode='r') as infile:
-        reader = csv_reader(infile, delimiter=";")
-        templates = [extract_values(line) for line in reader]
-        return templates
+        [5 rows x 4 columns]
+    
+    """
+    get_variables = lambda row: extract_variables(row["generator_query"])
+    templates = pd.read_csv(filepath, sep = ";")
+    templates["variables"] = templates.apply(get_variables, axis = 1)
+    return templates

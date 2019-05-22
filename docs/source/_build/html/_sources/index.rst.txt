@@ -3,18 +3,37 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to qapedia's documentation!
-===================================
+============================================
+Seja bem-vindo a documentação do **QApedia**
+============================================
 
 .. toctree::
+   :numbered:
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Sumário
 
-   modules
+   intro
 
-Indices and tables
-==================
+.. toctree::
+    :maxdepth: 2
+    :caption: Pacote
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+    qapedia
+.. ***********************************
+.. Welcome to qapedia's documentation!
+.. ***********************************
+
+
+.. .. toctree::
+..    :maxdepth: 2
+..    :caption: Contents:
+
+..    modules
+
+.. *********************
+.. Indices and tables
+.. *********************
+
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
