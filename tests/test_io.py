@@ -8,5 +8,5 @@ def test_load_templates():
         os.path.dirname(os.path.realpath(__file__)),
         'fixtures/sample.csv',
     )
-    type = "pandas.core.frame"
-    assert type(qapedia.io.load_templates(filepath)).__module__ == type
+    obj_type = "pandas.core.frame"
+    assert type(qapedia.io.load_templates(filepath)).__module__ == obj_type
