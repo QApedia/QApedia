@@ -1,7 +1,7 @@
-"""Este script trata das operações relacionadas a leitura e escrita do
+"""Este módulo trata das operações relacionadas a leitura e escrita do
 pacote ``qapedia``.
 
-Este arquivo tem as seguintes funções:
+Neste módulo, pode-se encontrar as seguintes funções:
 
 * load_templates - realiza a leitura do arquivo contendo o conjunto de
   templates utilizados para a geração de perguntas-queries.

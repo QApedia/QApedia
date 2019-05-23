@@ -1,3 +1,14 @@
+"""Este módulo contém o conjunto de operações utilizadas pelos módulos
+principais como por exemplo, o método
+:func:`qapedia.io.load_templates` que utiliza o método
+:func:`qapedia.utils.extract_variables` desse módulo para extrair o conjunto
+de variáveis presentes na query geradora (``generator_query``).
+
+Neste módulo, pode-se encontrar as seguintes funções:
+
+* extract_variables - realiza a extração das variáveis presentes no select da
+  query geradora.
+"""
 import re
 
 
