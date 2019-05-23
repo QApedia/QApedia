@@ -9,31 +9,32 @@ Este arquivo tem as seguintes funções:
 from qapedia.utils import extract_variables
 import pandas as pd
 
+
 def load_templates(filepath, delimiter=';'):
     """A função load_templates, carrega o conjunto de templates a partir de um
     arquivo csv. O dado deve possuir um campo ``generator_query`` que servirá
     para realizar buscas que preencherão as lacunas presentes nos campos
     ``question`` e ``query``.
-    
+
     Parameters
     ----------
     filepath : str
         Caminho do arquivo csv que contém os templates.
     delimiter : str, optional
         Indicar qual separador utilizado no arquivo, by default ';'
-    
+
     Returns
     -------
     pd.DataFrame
         Retorna um dataframe contendo o conjunto de templates.
-        
+
     Examples
     --------
     Exemplo contendo 14 templates sendo carregado através da função
     load_templates.
-    
+
     .. code-block:: python
-    
+
         >>> from qapedia.io import load_templates
         >>> filename = "sample.csv"
         >>> templates = load_templates(filename)
@@ -48,9 +49,9 @@ def load_templates(filepath, delimiter=';'):
         4      <A> e <B> é o trabalho notável de qual autor?  ...    [a, b]
 
         [5 rows x 4 columns]
-    
+
     """
-    get_variables = lambda row: extract_variables(row["generator_query"])
-    templates = pd.read_csv(filepath, sep = ";")
-    templates["variables"] = templates.apply(get_variables, axis = 1)
+    def get_variables(row): return extract_variables(row["generator_query"])
+    templates = pd.read_csv(filepath, sep=";")
+    templates["variables"] = templates.apply(get_variables, axis=1)
     return templates

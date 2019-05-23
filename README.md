@@ -11,13 +11,13 @@ QApedia - Gerador de pares questão-sparql
 
 O módulo ``qapedia`` foi desenvolvido em python e realiza a geração de pares de
 questões-sparql com base em um template previamente estabelecido. Para saber
-mais sobre o funcionamento do pacote, você pode ler sobre ele na [documentação](https://qapedia.readthedocs.io/en/latest/).
+mais sobre o funcionamento do pacote, você pode ler sobre ele na [documentação](https://qapedia.readthedocs.io/pt/latest/).
 
 
 ## Instalando
 
 
-Caso deseje, você pode realizar a instação do módulo do ``qapedia``,
+Caso deseje, você pode realizar a instalação do módulo do ``qapedia``,
 primeiramente, dentro da pasta do projeto, você deverá instalar os
 ``requirements.txt`` caso não possua as bibliotecas necessárias para executar o
 ``qapedia``. Em seguida no diretório do qapedia você pode executar o

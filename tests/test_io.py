@@ -1,5 +1,5 @@
 import pytest
-from qapedia.io import load_templates
+import qapedia.io
 import os
 
 
@@ -8,8 +8,5 @@ def test_load_templates():
         os.path.dirname(os.path.realpath(__file__)),
         'fixtures/sample.csv',
     )
-    assert type(load_templates(filepath)).__module__ == "pandas.core.frame"
-    
-
-
-
+    type = "pandas.core.frame"
+    assert type(qapedia.io.load_templates(filepath)).__module__ == type

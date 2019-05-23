@@ -18,16 +18,16 @@ def extract_variables(generator_query):
     Examples
     --------
     .. code-block:: python
-    
-        >>> generator_query = "select distinct ?a where { ?uri <http://dbpedia.org/ontology/author> ?a }"
+
+        >>> generator_query = "select distinct ?a where {"\\
+        ...                   "?uri <http://dbpedia.org/ontology/author> ?a }"
         >>> variables = extract_variables(generator_query)
         >>> print(variables)
         ['a']
     """
     variables = re.findall('^(.+?)where', generator_query, re.IGNORECASE)
     if variables:
-        variables = re.findall('\?(\w)', variables[0])
+        variables = re.findall(r"\?(\w)", variables[0])
     if not variables:
         return None
     return variables
-

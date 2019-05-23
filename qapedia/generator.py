@@ -64,29 +64,28 @@ def adjust_generator_query(generator_query, variables, lang="pt"):
         >>> variables = ['a']
         >>> result = adjust_generator_query(generator_query, variables)
         >>> result
-        "select distinct(?a) ?la where { ?a rdfs:label ?la. FILTER(lang(?la) = 'pt').  ?a dbo:abstract [] }"
+        "select distinct(?a) ?la where { ?a rdfs:label ?la. FILTER(lang(?la) \
+= 'pt').  ?a dbo:abstract [] }"
     """
 
-    if not variables:
-        return generator_query
+    def label_query(v):
+        return f"?{v} rdfs:label ?l{v}. FILTER(lang(?l{v}) = '{lang}'). "
 
-    def label_query(v): return (f"?{v} rdfs:label ?l{v}. "
-                                f"FILTER(lang(?l{v}) = '{lang}'). ")
-
-    # query result clause [select, ask, etc ...]
-    result_clause = re.findall('(.+)where', generator_query, re.IGNORECASE)
-    if not result_clause:
-        return None
-    result_clause = result_clause[0]
-    result_clause += ''.join(map("?l{:} ".format, variables))
-
-    # query pattern [where{...} ... ]
-    pattern = ''.join(map(label_query, variables))
-    pattern += re.findall(r"\{(.+)", generator_query)[0]
-
-    generator_query = f"{result_clause}where {{ {pattern}"
-
-    return generator_query
+    pattern = r"select(.+)where\s*{(.+)}([^}]+)*$"
+    valid = re.findall(pattern, generator_query, re.IGNORECASE)
+    if not valid:
+        raise Exception("A query não possui formato SELECT ... WHERE{...}")
+    else:
+        # Não se deseja adicionar a variável label na query
+        if not variables:
+            return generator_query
+        # first_piece: antes do where, last_piece: depois do where
+        first_piece, inside_where, last_piece,  = valid[0]
+        first_piece += ''.join(map("?l{:} ".format, variables))
+        inside_where = ''.join(map(label_query, variables)) + inside_where
+        # nova query construída com os campos de labels
+        new_query = f"select{first_piece}where {{{inside_where}}}{last_piece}"
+        return new_query
 
 
 def perform_query(query, endpoint="http://dbpedia.org/sparql"):
@@ -111,15 +110,21 @@ def perform_query(query, endpoint="http://dbpedia.org/sparql"):
     Examples
     --------
     .. code-block:: python
-    
-        >>> query = "SELECT * WHERE { ?manga a dbo:Manga . ?manga rdfs:label ?nome_manga . ?manga dbo:author dbr:Yoshihiro_Togashi . FILTER(lang(?nome_manga) = 'pt').}"
-        >>> perform_query(query)
-        {'head': {'link': [], 'vars': ['manga', 'nome_manga']}, 'results': {'distinct': False, 'ordered': True, 'bindings
-        ': [{'manga': {'type': 'uri', 'value': 'http://dbpedia.org/resource/Level_E'}, 'nome_manga': {'type': 'literal', 
-        'xml:lang': 'pt', 'value': 'Level E'}}, {'manga': {'type': 'uri', 'value': 'http://dbpedia.org/resource/Yu_Yu_Hak
-        usho'}, 'nome_manga': {'type': 'literal', 'xml:lang': 'pt', 'value': 'Yu Yu Hakusho'}}, {'manga': {'type': 'uri',
-        'value': 'http://dbpedia.org/resource/Hunter_×_Hunter'}, 'nome_manga': {'type': 'literal', 'xml:lang': 'pt', 'va
-        lue': 'Hunter × Hunter'}}]}}
+
+        >>> query = "SELECT * WHERE {"\\
+        ...         "?manga a dbo:Manga ."\\
+        ...         "?manga rdfs:label ?nome_manga ."\\
+        ...         "?manga dbo:author dbr:Yoshihiro_Togashi ."\\
+        ...         "FILTER(lang(?nome_manga) = 'pt').}"
+        >>> results = perform_query(query)
+        >>> results["head"]
+        >>> results = perform_query(query)
+        >>> results["head"]["vars"]
+        ['manga', 'nome_manga']
+        >>> results["results"]["bindings"][0]["manga"]
+        {'type': 'uri', 'value': 'http://dbpedia.org/resource/Level_E'}
+        >>> results["results"]["bindings"][0]["nome_manga"]
+        {'type': 'literal', 'xml:lang': 'pt', 'value': 'Level E'}
 
     """
     sparql = SPARQLWrapper(endpoint)
@@ -141,24 +146,24 @@ def perform_query(query, endpoint="http://dbpedia.org/sparql"):
 
 
 def get_results_of_generator_query(generator_query, variables,
-                                   endpoint = "http://dbpedia.org/sparql",
-                                   lang = "pt"):
-    
+                                   endpoint="http://dbpedia.org/sparql",
+                                   lang="pt"):
+
     """Dada uma ```generator_query``` é retornado um conjunto de
     resultados obtidos ao executar a query no endpoint especificado.
 
     Parameters
     ----------
     generator_query : str
-        String representando a ```generator_query```.   
+        String representando a ```generator_query```.
     variables : list
         Lista de caracteres correspondendo as variáveis.
     endpoint : str, optional
         Indica endpoint utilizado., by default "http://dbpedia.org/sparql"
     lang : str, optional
-       Idioma do campo ``rdfs:label`` adicionado na 
+       Idioma do campo ``rdfs:label`` adicionado na
        ``generator_query``. O valor padrão é "pt".
-           
+
     Returns
     -------
     dict
@@ -176,7 +181,7 @@ def get_results_of_generator_query(generator_query, variables,
 
 def extract_pairs(results, template, number_of_examples=600):
     """Realiza a extração do conjunto de pares  de questão-sparql
-    correspondentes obtidos pelo método 
+    correspondentes obtidos pelo método
     :func:`qapedia.generator.get_results_of_generator_query`.
 
     Parameters
@@ -198,19 +203,24 @@ def extract_pairs(results, template, number_of_examples=600):
     Examples
     --------
     .. code-block:: python
-    
+
         >>> from qapedia.generator import extract_pairs
-        >>> from qapedia.generator import perform_query
-        >>> template = {"question": "Yoshihiro Togashi escreveu <A>?", 
-        ...             "query": "ask where{ dbr:Yoshihiro_Togashi ^  dbo:author <A>}",
-        ...             "generator_query": "select ?a where{ dbr:Yoshihiro_Togashi ^  dbo:author ?a }",
-        ...             "variables": ['a']}
-        >>> results = perform_query("select ?a ?la where{ dbr:Yoshihiro_Togashi ^  dbo:author ?a . ?a rdfs:label ?la . FILTER(lang(?la) = 'en').}")
+        >>> from qapedia.generator import get_results_of_generator_query
+        >>> template = {"question": "Yoshihiro Togashi escreveu <A>?",
+        ...             "query": "ask where {"\\
+        ...                      "dbr:Yoshihiro_Togashi ^ dbo:author <A>}",
+        ...             "generator_query": "select ?a where{"\\
+        ...                          "dbr:Yoshihiro_Togashi ^ dbo:author ?a}",
+        ...             "variables": ["a"]}
+        >>> results = get_results_of_generator_query(
+        ...                                       template["generator_query"],
+        ...                                       template["variables"])
         >>> pairs = extract_pairs(results["results"]["bindings"], template)
         >>> pairs[1]["question"]
-        'Yoshihiro Togashi escreveu Ten de Shōwaru Cupid?'
+        'Yoshihiro Togashi escreveu Hunter × Hunter?'
         >>> pairs[1]["sparql"]
-        'ask where{ dbr:Yoshihiro_Togashi ^  dbo:author http://dbpedia.org/resource/Ten_de_Shōwaru_Cupid}'
+        'ask where {dbr:Yoshihiro_Togashi ^ dbo:author http://dbpedia.org/\
+resource/Hunter_×_Hunter}'
     """
     data = results.copy()
 
@@ -218,7 +228,7 @@ def extract_pairs(results, template, number_of_examples=600):
         return None
 
     if len(data) > number_of_examples:
-        #data = sort_matches(data, template)[0:number_of_examples]
+        # data = sort_matches(data, template)[0:number_of_examples]
         data = data[0:number_of_examples]
 
     # Embaralha os dados

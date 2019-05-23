@@ -5,36 +5,28 @@
             "a",
             "b"
         ],
-        "select distinct(?a) ?b ?la ?lb where { ?a rdfs:label ?la. FILTER(lang(?la) = 'pt'). ?b rdfs:label ?lb. FILTER(lang(?lb) = 'pt').  ?a a ?b }"
+        "select distinct(?a) ?b ?la ?lb where {?a rdfs:label ?la. FILTER(lang(?la) = 'pt'). ?b rdfs:label ?lb. FILTER(lang(?lb) = 'pt').  ?a a ?b }"
     ],
     [
         "select distinct(?a) where { ?a dbo:abstract [] }",
         [
             "a"
         ],
-        "select distinct(?a) ?la where { ?a rdfs:label ?la. FILTER(lang(?la) = 'pt').  ?a dbo:abstract [] }"
+        "select distinct(?a) ?la where {?a rdfs:label ?la. FILTER(lang(?la) = 'pt').  ?a dbo:abstract [] }"
     ],
     [
         "select distinct ?a where { ?uri <http://dbpedia.org/property/currentMembers> ?a . ?uri a <http://dbpedia.org/ontology/Band> }",
         [
             "a"
         ],
-        "select distinct ?a ?la where { ?a rdfs:label ?la. FILTER(lang(?la) = 'pt').  ?uri <http://dbpedia.org/property/currentMembers> ?a . ?uri a <http://dbpedia.org/ontology/Band> }"
+        "select distinct ?a ?la where {?a rdfs:label ?la. FILTER(lang(?la) = 'pt').  ?uri <http://dbpedia.org/property/currentMembers> ?a . ?uri a <http://dbpedia.org/ontology/Band> }"
     ],
     [
         "select distinct ?a where { ?x <http://dbpedia.org/property/publisher> ?a . ?x <http://dbpedia.org/ontology/genre> ?uri }",
         [
             "a"
         ],
-        "select distinct ?a ?la where { ?a rdfs:label ?la. FILTER(lang(?la) = 'pt').  ?x <http://dbpedia.org/property/publisher> ?a . ?x <http://dbpedia.org/ontology/genre> ?uri }"
-    ],
-    [
-        "select distinct(?a) ?b ",
-        [
-            "a",
-            "b"
-        ],
-        null
+        "select distinct ?a ?la where {?a rdfs:label ?la. FILTER(lang(?la) = 'pt').  ?x <http://dbpedia.org/property/publisher> ?a . ?x <http://dbpedia.org/ontology/genre> ?uri }"
     ],
     [
         "select distinct(?a) where { ?a dbo:abstract [] }",
