@@ -1,6 +1,4 @@
-
-QApedia - Gerador de pares questão-sparql
-===
+# <img alt="QApedia" src="docs/source/_static/logo.png" height="80">
 
 ![Travis](https://img.shields.io/travis/JessicaSousa/qapedia/master.svg?label=Travis%20CI)
 [![Build Status](https://dev.azure.com/qapedia/qapedia/_apis/build/status/jessicasousa.qapedia?branchName=master)](https://dev.azure.com/qapedia/qapedia/_build/latest?definitionId=1&branchName=master)
@@ -8,14 +6,13 @@ QApedia - Gerador de pares questão-sparql
 [![Documentation Status](https://readthedocs.org/projects/qapedia/badge/?version=latest)](https://qapedia.readthedocs.io/pt/latest/?badge=latest)
 [![GitHub license](https://img.shields.io/github/license/JessicaSousa/qapedia.svg)](https://github.com/JessicaSousa/qapedia/blob/master/LICENSE)
 [![Requirements Status](https://requires.io/github/JessicaSousa/qapedia/requirements.svg?branch=master)](https://requires.io/github/JessicaSousa/qapedia/requirements/?branch=master)
-![GitHub repo size](https://img.shields.io/github/repo-size/JessicaSousa/qapedia.svg)
 
 O módulo ``qapedia`` foi desenvolvido em python e realiza a geração de pares de
 questões-sparql com base em um template previamente estabelecido. Para saber
 mais sobre o funcionamento do pacote, você pode ler sobre ele na [documentação](https://qapedia.readthedocs.io/pt/latest/).
 
 
-## Instalando
+## ⚙️ Instalando
 
 
 Caso deseje, você pode realizar a instalação do módulo do ``qapedia``,
@@ -29,7 +26,16 @@ primeiramente, dentro da pasta do projeto, você deverá instalar os
     foo@bar:~/qapedia$ pip install .
 ```
 
-### Exemplo de uso
+## 📚 Documentação
+
+A documentação do ``qapedia`` se encontra disponível em qapedia.rtfd.io.
+
+Esse pacote contempla as seguintes operações:
+
+* Permite a busca de uma consulta *SPARQL* em um endpoint especificado.
+* Realiza a geração de pares de questões-sparql sobre a dbpedia a partir de um template previamente estabelecido.
+
+## 📝 Exemplo de uso
 
 
 Ao acessar o link http://dbpedia.org/sparql, você é levado a seguinte tela do
