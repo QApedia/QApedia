@@ -4,14 +4,14 @@ Instalação
 ----------
 
 
-Através do Python packages
-''''''''''''''''''''''''''
+.. Através do Python packages
+.. ''''''''''''''''''''''''''
 
-QApedia está disponível no PyPI e pode ser instalado usando o pip.
+.. QApedia está disponível no PyPI e pode ser instalado usando o pip.
 
-.. code-block:: sh
+.. .. code-block:: sh
 
-   pip install qapedia
+..    pip install qapedia
 
 
 Através do source
