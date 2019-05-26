@@ -3,20 +3,26 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-============================================
-Seja bem-vindo a documentação do **QApedia**
-============================================
+
+**QApedia** - Documentação de Usuário
+=====================================
+
+O QApedia é uma ferramenta de geração de pares de questão-sparql escrito em
+Python a partir do endpoint previamente estabelecido. O seu nome vem da
+junção dos termos QA de *Question-Answering* e *pedia* da palavra wikipedia.
 
 .. toctree::
-   :numbered:
    :maxdepth: 2
-   :caption: Sumário
+   :caption: Documentação
 
    intro
+   tutorial
+
+   user_guide/index.rst
 
 .. toctree::
     :maxdepth: 2
-    :caption: Pacote
+    :caption: Documentação dos módulos
 
     qapedia
 .. ***********************************

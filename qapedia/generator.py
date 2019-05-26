@@ -126,6 +126,12 @@ def perform_query(query, endpoint="http://dbpedia.org/sparql"):
         >>> results["results"]["bindings"][0]["nome_manga"]
         {'type': 'literal', 'xml:lang': 'pt', 'value': 'Level E'}
 
+    Raises
+    ------
+    exc_type
+        Caso haja um erro que não seja proveniente do problema de acesso ao
+        endpoint, por exemplo, uma query em um formato inválido, uma exceção é
+        gerada.
     """
     sparql = SPARQLWrapper(endpoint)
     sparql.setTimeout(600)
@@ -138,10 +144,6 @@ def perform_query(query, endpoint="http://dbpedia.org/sparql"):
     except Exception as e:
         exc_type, _, _ = sys.exc_info()
         raise exc_type
-    # except SPARQLExceptions.QueryBadFormed:
-    #     raise SPARQLExceptions.QueryBadFormed
-    # except:
-    #     raise Exception('An error occured.')
     return result
 
 
@@ -225,7 +227,7 @@ resource/Hunter_×_Hunter}'
     data = results.copy()
 
     if not data:
-        return None
+        return []
 
     if len(data) > number_of_examples:
         # data = sort_matches(data, template)[0:number_of_examples]
@@ -242,7 +244,7 @@ resource/Hunter_×_Hunter}'
 
         for variable in template['variables']:
             query = query.replace(
-                '<%s>' % variable.upper(), bindings[variable])
+                '<%s>' % variable.upper(), "<%s>" % bindings[variable])
             question = question.replace(
                 '<%s>' % variable.upper(), bindings['l'+variable])
         pairs.append({'sparql': query, 'question': question})

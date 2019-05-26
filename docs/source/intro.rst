@@ -1,6 +1,9 @@
-*********************
-Sobre o **QApedia**
-*********************
+==========
+Introdução
+==========
+
+O que é o QApedia?
+------------------
 
 **QApedia** ("QA" de Question-Answering, "pedia" de Wikipédia) é um pacote
 escrito em python que tem como objetivo realizar a geração de pares de
@@ -12,7 +15,7 @@ dados da DBpedia.
 
 
 DBpedia
-=======
+'''''''
 
 A **DBpedia** ("DB" de database) é um projeto criado pela comunidade que cria e
 fornece acesso aos dados estruturados `extraídos da Wikipédia`_. Esses dados
@@ -40,7 +43,7 @@ evento (``dbo:place``) ou um breve resumo sobre esse evento (``dbo:abstract``).
     :align: center
 
 Dados RDF
----------
+'''''''''
 
 O `Resource Description Framework (RDF)`_ é um framework que serve para
 expressar informações sobre recursos. Qualquer coisa pode ser considerada um
