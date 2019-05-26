@@ -90,7 +90,7 @@ def extract_pairs_test_data():
                         'type': 'literal', 'xml:lang': 'pt',
                         'value': 'Noragami'}}]
 
-    test1 = ([], template, 3, type(None))
+    test1 = ([], template, 3, list)
     test2 = (results, template, 3, list)
     return[test1, test2]
 
