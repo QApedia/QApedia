@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
-- master
+- dev
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -30,11 +30,3 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
-
-# specific branch build
-trigger:
-  branches:
-    include:
-    - dev
-    exclude:
-    - master
