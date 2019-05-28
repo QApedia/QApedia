@@ -18,3 +18,13 @@ script:
 # Push the results back to codecov
 after_success:
 - codecov
+
+# blocklist
+branches:
+  except:
+  - master
+
+# safelist
+branches:
+  only:
+  - dev
