@@ -111,7 +111,9 @@ def test_adjust_generator_query_failure():
 
 @pytest.mark.parametrize('query,endpoint, expected', perform_query_test_data())
 def test_perform_query(query, endpoint, expected):
-    assert type(qapedia.generator.perform_query(query, endpoint)) == expected
+    assert type(
+                qapedia.generator.perform_query(query,
+                                                endpoint=endpoint)) == expected
 
 
 @pytest.mark.parametrize('gquery, variables, expected, use_cache',

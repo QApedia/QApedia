@@ -88,7 +88,7 @@ def adjust_generator_query(generator_query, variables, lang="pt"):
         return new_query
 
 
-def perform_query(query, endpoint="http://dbpedia.org/sparql"):
+def perform_query(query, prefixes="", endpoint="http://dbpedia.org/sparql"):
     """Dada uma query sparql retorna um dicionário correspondendo ao
     resultado da pesquisa.
 
@@ -97,6 +97,9 @@ def perform_query(query, endpoint="http://dbpedia.org/sparql"):
     query : str
         Sparql utilizada para realizar uma busca no endpoint
         especificado.
+    prefixes: str, optional
+        Corresponde ao conjunto de prefixos utilizados na consulta SPARQL, o
+        valor padrão é "".
     endpoint : str, optional
         Indica endpoint utilizado, o valor default é
         ``http://dbpedia.org/sparql``
@@ -117,7 +120,6 @@ def perform_query(query, endpoint="http://dbpedia.org/sparql"):
         ...         "?manga dbo:author dbr:Yoshihiro_Togashi ."\\
         ...         "FILTER(lang(?nome_manga) = 'pt').}"
         >>> results = perform_query(query)
-        >>> results["head"]
         >>> results = perform_query(query)
         >>> results["head"]["vars"]
         ['manga', 'nome_manga']
@@ -133,6 +135,7 @@ def perform_query(query, endpoint="http://dbpedia.org/sparql"):
         endpoint, por exemplo, uma query em um formato inválido, uma exceção é
         gerada.
     """
+    query = prefixes + query
     sparql = SPARQLWrapper(endpoint)
     sparql.setTimeout(600)
     sparql.setQuery(query)
@@ -147,7 +150,7 @@ def perform_query(query, endpoint="http://dbpedia.org/sparql"):
     return result
 
 
-def get_results_of_generator_query(generator_query, variables,
+def get_results_of_generator_query(generator_query, variables, prefixes="",
                                    endpoint="http://dbpedia.org/sparql",
                                    lang="pt"):
 
@@ -160,6 +163,9 @@ def get_results_of_generator_query(generator_query, variables,
         String representando a ```generator_query```.
     variables : list
         Lista de caracteres correspondendo as variáveis.
+    prefixes: str, optional
+        Corresponde ao conjunto de prefixos utilizados na consulta SPARQL, o
+        valor padrão é "".
     endpoint : str, optional
         Indica endpoint utilizado., by default "http://dbpedia.org/sparql"
     lang : str, optional
@@ -176,7 +182,7 @@ def get_results_of_generator_query(generator_query, variables,
     if query in _cache:
         results = _cache[query]
     else:
-        results = perform_query(query, endpoint)
+        results = perform_query(query, prefixes, endpoint)
         _cache[query] = results
     return results
 
