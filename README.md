@@ -6,7 +6,7 @@
 [![codecov]( https://codecov.io/gh/JessicaSousa/qapedia/branch/master/graph/badge.svg)](https://codecov.io/gh/JessicaSousa/qapedia)
 [![Documentation Status](https://readthedocs.org/projects/qapedia/badge/?version=latest)](https://qapedia.readthedocs.io/pt/latest/?badge=latest)
 [![GitHub license](https://img.shields.io/github/license/JessicaSousa/qapedia.svg)](https://github.com/JessicaSousa/qapedia/blob/master/LICENSE)
-[![Requirements Status](https://requires.io/github/JessicaSousa/qapedia/requirements.svg?branch=master)](https://requires.io/github/JessicaSousa/qapedia/requirements/?branch=master)
+[![Requirements Status](https://requires.io/github/JessicaSousa/QApedia/requirements.svg?branch=master)](https://requires.io/github/JessicaSousa/QApedia/requirements/?branch=master)
 
 O módulo ``qapedia`` foi desenvolvido em python e realiza a geração de pares de
 questões-sparql com base em um template previamente estabelecido. Para saber
