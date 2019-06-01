@@ -18,6 +18,7 @@ funções:
 
 import re
 from random import shuffle
+from os.path import basename
 from SPARQLWrapper import SPARQLWrapper, JSON, SPARQLExceptions
 from urllib.error import HTTPError
 import sys
@@ -98,8 +99,9 @@ def perform_query(query, prefixes="", endpoint="http://dbpedia.org/sparql"):
         Sparql utilizada para realizar uma busca no endpoint
         especificado.
     prefixes: str, optional
-        Corresponde ao conjunto de prefixos utilizados na consulta SPARQL, o
-        valor padrão é "".
+        Corresponde ao conjunto de prefixos utilizados na consulta SPARQL.
+        Se não estiver usando prefixos, o uso desse parâmetro não é
+        necessário, o valor padrão é "".
     endpoint : str, optional
         Indica endpoint utilizado, o valor default é
         ``http://dbpedia.org/sparql``
@@ -135,10 +137,10 @@ def perform_query(query, prefixes="", endpoint="http://dbpedia.org/sparql"):
         endpoint, por exemplo, uma query em um formato inválido, uma exceção é
         gerada.
     """
-    query = prefixes + query
+    sparql_query = prefixes + query
     sparql = SPARQLWrapper(endpoint)
     sparql.setTimeout(600)
-    sparql.setQuery(query)
+    sparql.setQuery(sparql_query)
     sparql.setReturnFormat(JSON)
     try:
         result = sparql.query().convert()
@@ -164,8 +166,9 @@ def get_results_of_generator_query(generator_query, variables, prefixes="",
     variables : list
         Lista de caracteres correspondendo as variáveis.
     prefixes: str, optional
-        Corresponde ao conjunto de prefixos utilizados na consulta SPARQL, o
-        valor padrão é "".
+        Corresponde ao conjunto de prefixos utilizados na consulta SPARQL.
+        Se não estiver usando prefixos, o uso desse parâmetro não é
+        necessário, o valor padrão é "".
     endpoint : str, optional
         Indica endpoint utilizado., by default "http://dbpedia.org/sparql"
     lang : str, optional
@@ -187,7 +190,7 @@ def get_results_of_generator_query(generator_query, variables, prefixes="",
     return results
 
 
-def extract_pairs(results, template, number_of_examples=600):
+def extract_pairs(results, template, number_of_examples=600, prefixes=""):
     """Realiza a extração do conjunto de pares  de questão-sparql
     correspondentes obtidos pelo método
     :func:`qapedia.generator.get_results_of_generator_query`.
@@ -202,6 +205,10 @@ def extract_pairs(results, template, number_of_examples=600):
     number_of_examples : int, optional
         Número de resultados a serem considerados para o template,
         padrão 600.
+    prefixes: str, optional
+        Corresponde ao conjunto de prefixos utilizados na consulta SPARQL.
+        Se não estiver usando prefixos, o uso desse parâmetro não é
+        necessário, o valor padrão é "".
 
     Returns
     -------
@@ -236,11 +243,16 @@ resource/Hunter_×_Hunter}'
         return []
 
     if len(data) > number_of_examples:
-        # data = sort_matches(data, template)[0:number_of_examples]
         data = data[0:number_of_examples]
 
-    # Embaralha os dados
-    shuffle(data)
+    pattern = r"(\w+:)\s*\<(.*?)\>"
+    prefixes_list = re.findall(pattern, prefixes)
+
+    def adjust_uri(current_uri):
+        for prefix, uri in prefixes_list:
+            if uri in current_uri:
+                return prefix + basename(current_uri)
+        return f"<{current_uri}>"
 
     pairs = []
     for result in data:
@@ -249,9 +261,9 @@ resource/Hunter_×_Hunter}'
         question = template['question']
 
         for variable in template['variables']:
-            query = query.replace(
-                '<%s>' % variable.upper(), "<%s>" % bindings[variable])
             question = question.replace(
                 '<%s>' % variable.upper(), bindings['l'+variable])
+            query = query.replace('<%s>' % variable.upper(),
+                                  adjust_uri(bindings[variable]))
         pairs.append({'sparql': query, 'question': question})
     return pairs
