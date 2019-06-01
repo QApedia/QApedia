@@ -1,25 +1,24 @@
 import pytest
 import qapedia.generator
 
-
 def generator_query_test_data():
     # selecionar animes baseado em mangás
     test1 = ("SELECT ?a "
              "WHERE {"
              "?a dbo:type dbr:Manga ."
-             "?a dct:subject dbc:Anime_series_based_on_manga . }", ["a"], dict,
+             "?a dct:subject dbc:Anime_series_based_on_manga . }", ["a"], list,
              False)
     # selecionar lista de mangás escritas por Yoshihiro Togashi
     test2 = ("select ?a "
              "where{ "
              "?a dbo:author dbr:Yoshihiro_Togashi"
-             "}", [], dict, True)
+             "}", [], list, True)
     # selecionar animes baseado em mangás de Yoshihiro_Togashi e o estúdio
     test3 = ("select distinct(?a) ?b "
              "where{ "
              "?a dbo:author dbr:Yosnumber_of_exampleshihiro_Togashi."
              "?a dbp:studio ?b"
-             "}", ["a", "b"], dict, False)
+             "}", ["a", "b"], list, False)
     return [test1, test2, test3]
 
 
@@ -27,11 +26,11 @@ def perform_query_test_data():
     # Selecionar quem é o autor de Yu Yu Hakusho
     test1 = ("SELECT * WHERE {dbr:Yu_Yu_Hakusho dbo:author ?autor.}",
              "http://dbpedia.org/sparql",
-             dict)
+             list)
     # Yoshihiro Togashi escreveu Yu Yu Hakusho?
     test2 = ("ask where{dbr:Yu_Yu_Hakusho dbo:author dbr:Yoshihiro_Togashi}",
              "http://dbpedia.org/sparql",
-             dict)
+             bool)
     # Testando endpoint diferente
     # Quais mangás foram escritos por Yoshihiro Togashi?
     test3 = ("SELECT ?manga ?mangaLabel ?authorLabel "
@@ -44,12 +43,12 @@ def perform_query_test_data():
              "	}"
              "}",
              "https://query.wikidata.org/bigdata/namespace/wdq/sparql",
-             dict)
+             list)
     # Togashi escreveu Hunter x Hunter?
     test4 = ("ASK WHERE { ?author ?label 'Yoshihiro Togashi'@pt ."
              "wd:Q696071 wdt:P50 ?author .}",
              "https://query.wikidata.org/sparql",
-             dict)
+             bool)
     return [test1, test2, test3, test4]
 
 
@@ -66,29 +65,23 @@ def extract_pairs_test_data():
                                     "FILTER(lang(?la) = 'pt')}"),
                 "variables": ["a"]
                 }
+    class Value:
+        def __init__(self, value):
+          self.value = value
     # Exemplo com quatro resultados
     results = [  # Manga 1
-                {'a': {'type': 'uri',
-                       'value': 'http://dbpedia.org/resource/Maison_Ikkoku'},
-                    'la': {'type': 'literal', 'xml:lang': 'pt',
-                           'value': 'Maison Ikkoku'}},
+                {'a': Value('http://dbpedia.org/resource/Maison_Ikkoku'), 
+                'la': Value('Maison Ikkoku')},
                 # Manga 2
-                {'a': {'type': 'uri',
-                       'value': 'http://dbpedia.org/resource/One_Piece'},
-                    'la': {'type': 'literal', 'xml:lang': 'pt',
-                           'value': 'One Piece'}},
+                {'a': Value('http://dbpedia.org/resource/One_Piece'),
+                 'la': Value('One Piece')},
                 # Manga 3
-                {'a': {'type': 'uri',
-                       'value': 'http://dbpedia.org/resource/'\
-                                'We_Were_There_(manga)'},
-                    'la': {'type': 'literal', 'xml:lang': 'pt',
-                           'value': 'Bokura ga Ita'}},
+                {'a':Value('http://dbpedia.org/resource/'\
+                                'We_Were_There_(manga)'),
+                 'la': Value('Bokura ga Ita')},
                 # Manga 4
-                {'a': {'type': 'uri',
-                       'value': 'http://dbpedia.org/resource/Noragami'},
-                    'la': {
-                        'type': 'literal', 'xml:lang': 'pt',
-                        'value': 'Noragami'}}]
+                {'a':Value('http://dbpedia.org/resource/Noragami'),
+                 'la': Value('Noragami')}]
 
     test1 = ([], template, 3, list)
     test2 = (results, template, 3, list)
@@ -121,7 +114,7 @@ def test_perform_query(query, endpoint, expected):
 def test_get_results_of_generator_query(gquery, variables, expected,
                                         use_cache):
     if(use_cache):
-        qapedia.generator._cache[gquery] = {}
+        qapedia.generator._cache[gquery] = []
     assert type(qapedia.generator.get_results_of_generator_query(gquery,
                                                                  variables)
                 ) == expected
