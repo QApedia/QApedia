@@ -6,10 +6,15 @@ de variáveis presentes na query geradora (``generator_query``).
 
 Neste módulo, pode-se encontrar as seguintes funções:
 
-* extract_variables - realiza a extração das variáveis presentes no select da
-  query geradora.
+    * extract_variables - realiza a extração das variáveis presentes no select
+      da query geradora.
+    * convert_prefixes_to_list - dado o conjunto de prefixos, converte a
+      string em uma lista de tuplas.
 """
 import re
+
+
+__all__ = ['extract_variables', 'convert_prefixes_to_list']
 
 
 def extract_variables(generator_query):
@@ -42,3 +47,23 @@ def extract_variables(generator_query):
     if not variables:
         return None
     return variables
+
+
+def convert_prefixes_to_list(prefixes):
+    """Converte uma string dos prefixos em uma lista de tuplas. Onde cada par
+    contém um identificador e a uri correspondente.
+    
+    Parameters
+    ----------
+    prefixes : str
+        string correspondendo aos prefixos utilizados na consulta SPARQL.
+    
+    Returns
+    -------
+    list
+        Lista de tuplas, onde cada tupla contém dois itens, o primeiro
+        corresponde ao nome dado a URI que corresponde ao segundo item.
+    """
+    pattern = r"(\w+:)\s*\<(.*?)\>"
+    prefixes_list = re.findall(pattern, prefixes)
+    return prefixes_list
