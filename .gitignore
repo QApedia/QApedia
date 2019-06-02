@@ -102,6 +102,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-qapedia-workspace.code-workspace
+
+
+QApedia.code-workspace
 .vscode/settings.json
 QApedia.code-workspace

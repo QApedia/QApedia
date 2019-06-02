@@ -16,7 +16,7 @@ lista gerada e um exemplo.
     ...         ?uri <http://dbpedia.org/property/notableworks> ?b .\
     ...         ?uri a <http://dbpedia.org/ontology/Writer>}"
     >>> results = generator.perform_query(query)
-    >>> len(results["results"]["bindings"])
+    >>> len(results)
     10000
-    >>> results["results"]["bindings"][5000]
-    {'a': {'type': 'typed-literal', 'datatype': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString', 'value': 'Principles of the Criminal Law of Scotland'}, 'b': {'type': 'typed-literal', 'datatype': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString', 'value': 'History of Europe, 19 volumes'}}
+    >>> results[15]
+    {'a': Value(typed-literal:'Petty Crimes'), 'b': Value(typed-literal:'New and Selected Poems')}

@@ -9,6 +9,8 @@ Neste módulo, pode-se encontrar as seguintes funções:
 from qapedia.utils import extract_variables
 import pandas as pd
 
+__all__ = ['load_templates']
+
 
 def load_templates(filepath, delimiter=';'):
     """A função load_templates, carrega o conjunto de templates a partir de um
