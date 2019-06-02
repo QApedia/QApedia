@@ -29,10 +29,10 @@ qapedia.utils module
     :show-inheritance:
 
 
-Module contents
----------------
+.. Module contents
+.. ---------------
 
-.. automodule:: qapedia
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. .. automodule:: qapedia
+..     :members:
+..     :undoc-members:
+..     :show-inheritance:
