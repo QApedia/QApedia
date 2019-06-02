@@ -20,7 +20,6 @@ import re
 from random import shuffle
 from SPARQLWrapper import SPARQLWrapper2, SPARQLExceptions, SmartWrapper
 from urllib.error import HTTPError
-import sys
 from qapedia import utils
 from os.path import basename
 
@@ -113,8 +112,8 @@ def adjust_generator_query(generator_query, variables, lang="pt"):
 
 def perform_query(query, prefixes="", endpoint="http://dbpedia.org/sparql"):
     """Dada uma query sparql retorna uma lista correspondendo ao
-    resultado da pesquisa se a cláusula utilizada for SELECT ou CONSTRUCT.
-    Caso seja ASK, o valor retornado é um `boolean`.
+    resultado da pesquisa se a cláusula utilizada for SELECT, CONSTRUCT ou
+    DESCRIBE. Caso seja ASK, o valor retornado é um `boolean`.
 
     Parameters
     ----------
@@ -171,9 +170,8 @@ def perform_query(query, prefixes="", endpoint="http://dbpedia.org/sparql"):
         result = _extract_bindings(result)
     except (HTTPError, SPARQLExceptions.EndPointInternalError):
         result = []
-    except Exception:
-        exc_type, _, _ = sys.exc_info()
-        raise exc_type
+    except Exception as e:
+        raise e
     return result
 
 
