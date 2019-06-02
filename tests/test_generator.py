@@ -50,12 +50,13 @@ def perform_query_test_data():
              "wd:Q696071 wdt:P50 ?author .}",
              "https://query.wikidata.org/sparql",
              bool)
-
+    # Testando cláusula DESCRIBE.
     test5 = ("DESCRIBE dbr:Panara_language", "http://dbpedia.org/sparql", list)
     return [test1, test2, test3, test4, test5]
 
 
 def extract_pairs_test_data():
+    # Template utilizado exemplo para testar generator.extract_pairs
     template = {"question": "o manga <A> possui um anime?",
                 "query": ("ask where { <A> dbo:type dbr:Manga . "
                           "<A> dct:subject dbc:Anime_series_based_on_manga.}"
@@ -69,10 +70,13 @@ def extract_pairs_test_data():
                 "variables": ["a"]
                 }
 
+    # Classe auxiliar para ajudar a simular a estrutura retornada pelo
+    # perform_query
     class Value:
         def __init__(self, value):
             self.value = value
-    # Exemplo com quatro resultados
+
+    # Exemplo com quatro resultados para teste
     results = [  # Manga 1
                 {'a': Value('dbr:Maison_Ikkoku'),
                  'la': Value('Maison Ikkoku')},
@@ -87,12 +91,28 @@ def extract_pairs_test_data():
                 {'a': Value('http://dbpedia.org/resource/Noragami'),
                  'la': Value('Noragami')}]
 
+    # Situação 1: resultados não foram retornados, sem prefixos definidos.
     test1 = ([], template, 3, [], list)
+    # Situação 2: resultados retornados, sem prefixos definidos
     test2 = (results, template, 3, [], list)
+    # Situação 3: resultados retornados, prefixos definidos
     test3 = (results, template, 3,
              [("dbr:", "http://dbpedia.org/resource/")],
              list)
     return[test1, test2, test3]
+
+
+def perform_query_test_failure_data():
+    # Situação 1: link passado é inválido.
+    test1 = ("ask where{ ?a dbo:author dbr:Yoshihiro_Togashi}",
+             "link-invalido",
+             r"unknown url type:*")
+    # Situação 2: A query contém algum erro, falta o "?" antes da variável.
+    test2 = ("ask where{ a dbo:author dbr:Yoshihiro_Togashi}",
+             "http://dbpedia.org/sparql",
+             r"QueryBadFormed:.*")
+
+    return [test1, test2]
 
 
 def test_adjust_generator_query(adjust_generator_query_example):
@@ -115,18 +135,6 @@ def test_perform_query(query, endpoint, expected):
     assert type(
                 qapedia.generator.perform_query(query,
                                                 endpoint=endpoint)) == expected
-
-
-def perform_query_test_failure_data():
-    test1 = ("ask where{ ?a dbo:author dbr:Yoshihiro_Togashi}",
-             "link-invalido",
-             r"unknown url type:*")
-
-    test2 = ("ask where{ a dbo:author dbr:Yoshihiro_Togashi}",
-             "http://dbpedia.org/sparql",
-             r"QueryBadFormed:.*")
-
-    return [test1, test2]
 
 
 @pytest.mark.parametrize('query, endpoint, expected',
