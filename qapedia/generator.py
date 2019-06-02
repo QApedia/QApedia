@@ -31,6 +31,23 @@ _cache = {}
 
 
 def _adjust_uri(current_uri, prefixes_list):
+    """Método auxiliar utilizado por ``extract_pairs`` que realiza a
+    substiuição dos URIs pela sua versão reduzida.
+    
+    Parameters
+    ----------
+    current_uri : str
+        URI, por exemplo, ``http://dbpedia.org/resource/Brazil``.
+    prefixes_list : [type]
+        lista contendo os prefixos, por exemplo,
+        [("dbr:", "http://dbpedia.org/resource/")].
+    
+    Returns
+    -------
+    str
+        URI no formato reduzido, por exemplo, 
+        ``http://dbpedia.org/resource/Brazil`` se torna ``dbr:Brazil``.
+    """
     for prefix, uri in prefixes_list:
         if uri in current_uri:
             return prefix + basename(current_uri)
@@ -38,6 +55,9 @@ def _adjust_uri(current_uri, prefixes_list):
 
 
 def _extract_bindings(result):
+    """Método auxiliar utilizado em ``perform_query`` que tem como objetivo
+    retornar os bindings/boolean retornados pela busca.
+    """
     if(type(result) == SmartWrapper.Bindings):
         return result.bindings
     if 'boolean' in result:

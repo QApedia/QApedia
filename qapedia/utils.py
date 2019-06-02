@@ -82,6 +82,28 @@ def convert_prefixes_to_list(prefixes):
     list
         Lista de tuplas, onde cada tupla contém dois itens, o primeiro
         corresponde ao nome dado a URI que corresponde ao segundo item.
+
+    Examples
+    --------
+    .. code-block:: python
+
+        >>> from qapedia.utils import convert_prefixes_to_list
+        >>> prefixes = "PREFIX rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\
+        ...             PREFIX foaf:       <http://xmlns.com/foaf/0.1/>\\
+        ...             PREFIX yago:       <http://yago-knowledge.org/resource/>\\
+        ...             PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>\\
+        ...             PREFIX dbo:        <http://dbpedia.org/ontology/>\\
+        ...             PREFIX dbp:        <http://dbpedia.org/property/>"
+        >>> list_of_prefixes = convert_prefixes_to_list(prefixes)
+        >>> for prefix, uri in list_of_prefixes:
+        ...     print(prefix, uri)
+        ... 
+        rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+        foaf: http://xmlns.com/foaf/0.1/
+        yago: http://yago-knowledge.org/resource/
+        rdfs: http://www.w3.org/2000/01/rdf-schema#
+        dbo: http://dbpedia.org/ontology/
+        dbp: http://dbpedia.org/property/
     """
     pattern = r"(\w+:)\s*\<(.*?)\>"
     prefixes_list = re.findall(pattern, prefixes)
@@ -89,6 +111,19 @@ def convert_prefixes_to_list(prefixes):
 
 
 def _replace_symbols_with_text(sparql):
+    """Método auxiliar utilizado por ``encode`` para realizar a substituição
+    de alguns símbolos da sparql para seu equivalente em texto.
+    
+    Parameters
+    ----------
+    sparql : str
+        sparql normal
+    
+    Returns
+    -------
+    str
+        sparql codificada
+    """
     for symbol, text in _symbols_and_its_equivalent:
         sparql = sparql.replace(symbol, text)
     sparql = re.sub(r"\.(\B|filter)", r" sep_dot \1", sparql, flags=re.I)
@@ -145,7 +180,20 @@ def encode(sparql, prefixes):
     return sparql
 
 
-def _encoded_symbols_to_symbols(sparql):
+def _revert_encoded_symbols(sparql):
+    """Método auxiliar utilizado por ``decode`` para realizar a substituição
+    inversa da função ``_replace_symbols_with_text``.
+    
+    Parameters
+    ----------
+    sparql : str
+        sparql codificada
+    
+    Returns
+    -------
+    str
+        sparql decodificada
+    """
     for symbol, text in _symbols_and_its_equivalent:
         sparql = sparql.replace(text, symbol)
     sparql = sparql.replace(" sep_dot ", ".")
@@ -196,5 +244,5 @@ def decode(sparql_encoded, prefixes):
     for prefix, _ in prefixes:
         encoding = prefix.replace(":", "_")
         sparql = sparql.replace(encoding, prefix)
-    sparql = _encoded_symbols_to_symbols(sparql)
+    sparql = _revert_encoded_symbols(sparql)
     return sparql
