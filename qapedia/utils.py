@@ -107,7 +107,7 @@ def encode(sparql, prefixes):
     -------
     str
         sparql transformada.
-    
+
     Examples
     --------
     .. code-block:: python
@@ -117,16 +117,19 @@ def encode(sparql, prefixes):
         >>> prefixes = "PREFIX prop: <http://dbpedia.org/property/>\\
         ...             PREFIX dbr: <http://dbpedia.org/resource/>"
         >>> query = "ASK {\\n\\
-        ...         <http://dbpedia.org/resource/Amazon_River> prop:length ?amazon .\\n\\
+        ...         <http://dbpedia.org/resource/Amazon_River> prop:length \
+    ?amazon .\\n\\
         ...         <http://dbpedia.org/resource/Nile> prop:length ?nile .\\n\\
-        ...         FILTER(?amazon > ?nile) .}"
+        ...         FILTER(?amazon > ?nile) .\\n\\
+        ...         }"
         >>> list_of_prefixes = convert_prefixes_to_list(prefixes)
         >>> query_encoded = encode(query, list_of_prefixes)
         >>> print(query_encoded)
-        ASK  bracket_open 
-                dbr_Amazon_River prop_length var_amazon  sep_dot 
-                dbr_Nile prop_length var_nile  sep_dot 
-                FILTER(var_amazon  greater_than  var_nile)  sep_dot  bracket_close 
+        ASK  bracket_open
+                dbr_Amazon_River prop_length     var_amazon  sep_dot
+                dbr_Nile prop_length var_nile  sep_dot
+                FILTER(var_amazon  greater_than  var_nile)  sep_dot
+                bracket_close
     """
     for prefix, uri in prefixes:
         encoding = prefix.replace(":", "_")
@@ -173,14 +176,16 @@ def decode(sparql_encoded, prefixes):
         ...             PREFIX dbr: <http://dbpedia.org/resource/>"
         >>> list_of_prefixes = convert_prefixes_to_list(prefixes)
         >>> query_encoded = "ASK  bracket_open \\n\\
-        ...         dbr_Amazon_River prop_length var_amazon  sep_dot \\n\\
-        ...         dbr_Nile prop_length var_nile  sep_dot \\n\\
-        ...         FILTER(var_amazon  greater_than  var_nile)  sep_dot  bracket_close "
+        ...       dbr_Amazon_River prop_length var_amazon  sep_dot \\n\\
+        ...       dbr_Nile prop_length var_nile  sep_dot \\n\\
+        ...       FILTER(var_amazon  greater_than  var_nile)  sep_dot  \\n\\
+        ...       bracket_close "
         >>> print(decode(query_encoded, list_of_prefixes))
         ASK {
-                dbr:Amazon_River prop:length ?amazon .
-                dbr:Nile prop:length ?nile .
-                FILTER(?amazon > ?nile) .}
+            dbr:Amazon_River prop:length ?amazon .
+            dbr:Nile prop:length ?nile .
+            FILTER(?amazon > ?nile) . 
+            }
     """
     sparql = sparql_encoded
     for prefix, _ in prefixes:
