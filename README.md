@@ -8,7 +8,7 @@
 [![GitHub license](https://img.shields.io/github/license/JessicaSousa/qapedia.svg)](https://github.com/JessicaSousa/qapedia/blob/master/LICENSE)
 [![Requirements Status](https://requires.io/github/JessicaSousa/QApedia/requirements.svg?branch=master)](https://requires.io/github/JessicaSousa/QApedia/requirements/?branch=master)
 
-O módulo ``qapedia`` foi desenvolvido em python e realiza a geração de pares de
+O módulo ``QApedia`` foi desenvolvido em python e realiza a geração de pares de
 questões-sparql com base em um template previamente estabelecido. Para saber
 mais sobre o funcionamento do pacote, você pode ler sobre ele na [documentação](https://qapedia.readthedocs.io/pt/latest/).
 
@@ -16,20 +16,20 @@ mais sobre o funcionamento do pacote, você pode ler sobre ele na [documentaçã
 ## ⚙️ Instalando
 
 
-Caso deseje, você pode realizar a instalação do módulo do ``qapedia``,
+Caso deseje, você pode realizar a instalação do módulo do ``QApedia``,
 primeiramente, dentro da pasta do projeto, você deverá instalar os
 ``requirements.txt`` caso não possua as bibliotecas necessárias para executar o
-``qapedia``. Em seguida no diretório do qapedia você pode executar o
+``QApedia``. Em seguida no diretório do QApedia você pode executar o
 ``pip install .``.
 
 ```console
-    foo@bar:~/qapedia$ pip install -r requirements.txt
-    foo@bar:~/qapedia$ pip install .
+    foo@bar:~/QApedia$ pip install -r requirements.txt
+    foo@bar:~/QApedia$ pip install .
 ```
 
 ## 📚 Documentação
 
-A documentação do ``qapedia`` se encontra disponível em qapedia.rtfd.io.
+A documentação do ``QApedia`` se encontra disponível em qapedia.rtfd.io.
 
 Esse pacote contempla as seguintes operações:
 
@@ -46,13 +46,13 @@ busca SPARQL estão mostrados na figura abaixo.
 ![Virtuoso SPARQL Endpoint](docs/source/_static/SPARQL_Query_Editor.png)
 
 
-No ``qapedia``, o resultado de uma consulta pode ser obtido no formato json
+No ``QApedia``, o resultado de uma consulta pode ser obtido no formato json
 nesse endpoint através da função
-``qapedia.generator.get_results_of_generator_query``, no python ele é exibido
+``QApedia.generator.get_results_of_generator_query``, no python ele é exibido
 no formato dicionário, conforme mostrado no bloco de código a seguir.
 
 ```python
->>> from qapedia import generator
+>>> from QApedia import generator
 >>> template = {"question": "latitude de <A>",
 ...             "query": "select ?a where { <A> geo:lat ?a }",
 ...             "generator_query": "select distinct(?a) where"\
@@ -67,11 +67,11 @@ no formato dicionário, conforme mostrado no bloco de código a seguir.
 ```
 Com o resultado obtido em cima da ``generator_query``, a construção dos pares
 questões-sparql podem ser realizados ao chamar a função
-``qapedia.generator.extract_pairs``, o resultado será exibido como uma lista de
+``QApedia.generator.extract_pairs``, o resultado será exibido como uma lista de
 dicionários, onde cada um deles conterá as chaves ``question`` e ``sparql``.
 
 ```python
->>> from qapedia import generator
+>>> from QApedia import generator
 >>> template = {"question": "latitude de <A>",
 ...             "query": "select ?a where { <A> geo:lat ?a }",
 ...             "generator_query": "select distinct(?a) where"\
