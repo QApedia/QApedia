@@ -1,6 +1,7 @@
 import pytest
 import qapedia.generator
 
+
 def generator_query_test_data():
     # selecionar animes baseado em mangás
     test1 = ("SELECT ?a "
@@ -49,7 +50,9 @@ def perform_query_test_data():
              "wd:Q696071 wdt:P50 ?author .}",
              "https://query.wikidata.org/sparql",
              bool)
-    return [test1, test2, test3, test4]
+
+    test5 = ("DESCRIBE dbr:Panara_language", "http://dbpedia.org/sparql", list)
+    return [test1, test2, test3, test4, test5]
 
 
 def extract_pairs_test_data():
@@ -65,27 +68,31 @@ def extract_pairs_test_data():
                                     "FILTER(lang(?la) = 'pt')}"),
                 "variables": ["a"]
                 }
+
     class Value:
         def __init__(self, value):
-          self.value = value
+            self.value = value
     # Exemplo com quatro resultados
     results = [  # Manga 1
-                {'a': Value('http://dbpedia.org/resource/Maison_Ikkoku'), 
-                'la': Value('Maison Ikkoku')},
+                {'a': Value('dbr:Maison_Ikkoku'),
+                 'la': Value('Maison Ikkoku')},
                 # Manga 2
                 {'a': Value('http://dbpedia.org/resource/One_Piece'),
                  'la': Value('One Piece')},
                 # Manga 3
-                {'a':Value('http://dbpedia.org/resource/'\
-                                'We_Were_There_(manga)'),
+                {'a': Value('http://dbpedia.org/resource/'\
+                            'We_Were_There_(manga)'),
                  'la': Value('Bokura ga Ita')},
                 # Manga 4
-                {'a':Value('http://dbpedia.org/resource/Noragami'),
+                {'a': Value('http://dbpedia.org/resource/Noragami'),
                  'la': Value('Noragami')}]
 
-    test1 = ([], template, 3, list)
-    test2 = (results, template, 3, list)
-    return[test1, test2]
+    test1 = ([], template, 3, [], list)
+    test2 = (results, template, 3, [], list)
+    test3 = (results, template, 3,
+             [("dbr:", "http://dbpedia.org/resource/")],
+             list)
+    return[test1, test2, test3]
 
 
 def test_adjust_generator_query(adjust_generator_query_example):
@@ -102,11 +109,32 @@ def test_adjust_generator_query_failure():
         qapedia.generator.adjust_generator_query(generator_query, variables)
 
 
-@pytest.mark.parametrize('query,endpoint, expected', perform_query_test_data())
+@pytest.mark.parametrize('query, endpoint, expected',
+                         perform_query_test_data())
 def test_perform_query(query, endpoint, expected):
     assert type(
                 qapedia.generator.perform_query(query,
                                                 endpoint=endpoint)) == expected
+
+
+def perform_query_test_failure_data():
+    test1 = ("ask where{ ?a dbo:author dbr:Yoshihiro_Togashi}",
+             "link-invalido",
+             r"unknown url type:*")
+
+    test2 = ("ask where{ a dbo:author dbr:Yoshihiro_Togashi}",
+             "http://dbpedia.org/sparql",
+             r"QueryBadFormed:.*")
+
+    return [test1, test2]
+
+
+@pytest.mark.parametrize('query, endpoint, expected',
+                         perform_query_test_failure_data())
+def test_perform_query_failure(query, endpoint, expected):
+    query = "ask where{ a dbo:author dbr:Yoshihiro_Togashi}"
+    with pytest.raises(Exception, match=expected):
+        qapedia.generator.perform_query(query, endpoint=endpoint)
 
 
 @pytest.mark.parametrize('gquery, variables, expected, use_cache',
@@ -120,8 +148,11 @@ def test_get_results_of_generator_query(gquery, variables, expected,
                 ) == expected
 
 
-@pytest.mark.parametrize('results, template, examples, expected',
+@pytest.mark.parametrize(("results, template, examples,"
+                         "list_of_prefixes, expected"),
                          extract_pairs_test_data())
-def test_extract_pairs(results, template, examples, expected):
+def test_extract_pairs(results, template, examples,
+                       list_of_prefixes, expected):
     assert type(qapedia.generator.extract_pairs(results, template,
-                                                examples)) == expected
+                                                examples,
+                                                list_of_prefixes)) == expected
