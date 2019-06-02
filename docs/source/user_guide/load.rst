@@ -7,7 +7,7 @@ Carregue o pacote para poder utilizar suas funcionalidades
 
     >>> import qapedia
 
-Você pode carregar o dataset utilizando a função
+Você pode carregar o seu dataset utilizando a função
 :func:`qapedia.io.load_templates` presente no pacote. O arquivo do dataset
 deve estar no formato csv, a primeira linha deve conter o nome das colunas.
 Esses nomes devem ser os mesmos que são mostrados no :doc:`../tutorial`. São
@@ -18,6 +18,9 @@ eles:
   presente na *query*.
 * **generator_query** - query utilizada para preencher as lacunas e assim
   permitir a geração do conjunto de ``question-query``.
+
+Na tabela seguir é mostrado um exemplo de dataset contendo apenas um
+template.
 
 +---------------------+---------------------+--------------------+
 | question            | query               | generator_query    |
@@ -46,5 +49,6 @@ leitura do conjunto de dados e são disponibilizadas na coluna **variables**.
 
     [5 rows x 4 columns]
 
-
-
+Para o exemplo mostrado na tabela anterior, sobre a **generator_query**
+"*select distinct* **?a** *where {  ?uri dbo:author ?a}*", a variável extraída
+seria o *a*.

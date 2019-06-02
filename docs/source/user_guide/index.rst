@@ -9,6 +9,7 @@ Guia de Usuário
    load
    adjust
    query
+   generator
 ..    output
 ..    message-control
 ..    options

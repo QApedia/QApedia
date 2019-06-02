@@ -31,7 +31,8 @@ importantes utilizadas nesse documento.
     http://dbpedia.org/resource/Hunter_%C3%97_Hunter
     https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol
     https://qapedia.readthedocs.io/pt/latest/
-* **Prefix declarations** - São abreviações de URIs.
+* **Prefix** - São abreviações de URIs. São similares os `imports` e
+  `includes`, onde é definida as abreviações utilizadas.
 * **resource** (recurso) - são representados com URIs, e podem ser
   abreviados como nomes prefixados.
 
@@ -70,4 +71,5 @@ e *query*.
 A *generator_query* é utilizada para realizar uma consulta no endpoint
 especificado e ajustada para retornar os campos de *rdfs:label* e a *URI* do
 recurso autor. Com esse resultado, preenchemos as lacunas presente no template
-e geramos pares similares ao do exemplo mostrado.
+e geramos pares similares ao do exemplo mostrado. Nas próxima seção é mostrado
+o guia de usuário contendo instruções de uso das funções do pacote.

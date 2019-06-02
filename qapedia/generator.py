@@ -93,7 +93,7 @@ def adjust_generator_query(generator_query, variables, lang="pt"):
     def label_query(v):
         return f"?{v} rdfs:label ?l{v}. FILTER(lang(?l{v}) = '{lang}'). "
 
-    pattern = r"select(.+)where\s*{(.+)}([^}]+)*$"
+    pattern = r"select(.*)where\s*\{([^)]+)\}([^}]+)*$"
     valid = re.findall(pattern, generator_query, re.IGNORECASE)
     if not valid:
         raise Exception("A query não possui formato SELECT ... WHERE{...}")
@@ -277,7 +277,7 @@ resource/Hunter_×_Hunter}'
     query = template['query']
     question = template['question']
 
-    for result in bindings:
+    for result in my_bindings:
         # Para cada variável preencher as lacunas com os resultados da busca
         for variable in template['variables']:
             current_question = question.replace('<%s>' % variable.upper(),
