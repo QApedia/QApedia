@@ -3,7 +3,7 @@
 [![Travis](https://img.shields.io/travis/JessicaSousa/qapedia/dev.svg?label=Travis%20CI)](
     https://travis-ci.org/JessicaSousa/qapedia)
 [![Build Status](https://dev.azure.com/qapedia/qapedia/_apis/build/status/jessicasousa.qapedia?branchName=dev)](https://dev.azure.com/qapedia/qapedia/_build/latest?definitionId=1&branchName=dev)
-[![codecov]( https://codecov.io/gh/JessicaSousa/qapedia/branch/master/graph/badge.svg)](https://codecov.io/gh/JessicaSousa/qapedia)
+[![codecov]( https://codecov.io/gh/JessicaSousa/qapedia/branch/dev/graph/badge.svg)](https://codecov.io/gh/JessicaSousa/qapedia)
 [![Documentation Status](https://readthedocs.org/projects/qapedia/badge/?version=dev)](https://qapedia.readthedocs.io/pt/dev/?badge=dev)
 [![GitHub license](https://img.shields.io/github/license/JessicaSousa/qapedia.svg)](https://github.com/JessicaSousa/qapedia/blob/dev/LICENSE)
 [![Requirements Status](https://requires.io/github/JessicaSousa/QApedia/requirements.svg?branch=dev)](https://requires.io/github/JessicaSousa/QApedia/requirements/?branch=dev)
