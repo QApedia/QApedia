@@ -88,17 +88,15 @@ def convert_prefixes_to_list(prefixes):
     .. code-block:: python
 
         >>> from qapedia.utils import convert_prefixes_to_list
-        >>> prefixes = "PREFIX rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\
-        ...             PREFIX foaf:       <http://xmlns.com/foaf/0.1/>\\
-        ...             PREFIX yago:       <http://yago-knowledge.org/resource/>\\
-        ...             PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>\\
-        ...             PREFIX dbo:        <http://dbpedia.org/ontology/>\\
-        ...             PREFIX dbp:        <http://dbpedia.org/property/>"
+        >>> prefixes = "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\\
+        ...             PREFIX yago: <http://yago-knowledge.org/resource/>\\
+        ...             PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>\\
+        ...             PREFIX dbo:<http://dbpedia.org/ontology/>\\
+        ...             PREFIX dbp:<http://dbpedia.org/property/>"
         >>> list_of_prefixes = convert_prefixes_to_list(prefixes)
         >>> for prefix, uri in list_of_prefixes:
         ...     print(prefix, uri)
-        ... 
-        rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+        ...
         foaf: http://xmlns.com/foaf/0.1/
         yago: http://yago-knowledge.org/resource/
         rdfs: http://www.w3.org/2000/01/rdf-schema#
@@ -113,12 +111,12 @@ def convert_prefixes_to_list(prefixes):
 def _replace_symbols_with_text(sparql):
     """Método auxiliar utilizado por ``encode`` para realizar a substituição
     de alguns símbolos da sparql para seu equivalente em texto.
-    
+
     Parameters
     ----------
     sparql : str
         sparql normal
-    
+
     Returns
     -------
     str
@@ -183,12 +181,12 @@ def encode(sparql, prefixes):
 def _revert_encoded_symbols(sparql):
     """Método auxiliar utilizado por ``decode`` para realizar a substituição
     inversa da função ``_replace_symbols_with_text``.
-    
+
     Parameters
     ----------
     sparql : str
         sparql codificada
-    
+
     Returns
     -------
     str

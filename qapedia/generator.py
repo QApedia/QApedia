@@ -33,7 +33,7 @@ _cache = {}
 def _adjust_uri(current_uri, prefixes_list):
     """Método auxiliar utilizado por ``extract_pairs`` que realiza a
     substiuição dos URIs pela sua versão reduzida.
-    
+
     Parameters
     ----------
     current_uri : str
@@ -41,11 +41,11 @@ def _adjust_uri(current_uri, prefixes_list):
     prefixes_list : [type]
         lista contendo os prefixos, por exemplo,
         [("dbr:", "http://dbpedia.org/resource/")].
-    
+
     Returns
     -------
     str
-        URI no formato reduzido, por exemplo, 
+        URI no formato reduzido, por exemplo,
         ``http://dbpedia.org/resource/Brazil`` se torna ``dbr:Brazil``.
     """
     for prefix, uri in prefixes_list:
