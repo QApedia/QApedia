@@ -1,12 +1,12 @@
 """Este módulo trata das operações relacionadas a leitura e escrita do
-pacote ``qapedia``.
+pacote ``QApedia``.
 
 Neste módulo, pode-se encontrar as seguintes funções:
 
 * load_templates - realiza a leitura do arquivo contendo o conjunto de
   templates utilizados para a geração de perguntas-queries.
 """
-from qapedia.utils import extract_variables
+from QApedia.utils import extract_variables
 import pandas as pd
 
 __all__ = ['load_templates']
@@ -37,7 +37,7 @@ def load_templates(filepath, delimiter=';'):
 
     .. code-block:: python
 
-        >>> from qapedia.io import load_templates
+        >>> from QApedia.io import load_templates
         >>> filename = "sample.csv"
         >>> templates = load_templates(filename)
         >>> len(templates)

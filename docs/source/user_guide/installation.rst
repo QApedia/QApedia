@@ -28,9 +28,9 @@ comandos a seguir
 
 .. code-block:: console
 
-    foo@bar:~$ git clone https://github.com/JessicaSousa/qapedia.git
-    foo@bar:~$ cd qapedia
-    foo@bar:~/qapedia$ pip install .
+    foo@bar:~$ git clone https://github.com/JessicaSousa/QApedia.git
+    foo@bar:~$ cd QApedia
+    foo@bar:~/QApedia$ pip install .
 
 
 .. Através do Python packages
@@ -40,6 +40,6 @@ comandos a seguir
 
 .. .. code-block:: sh
 
-..    pip install qapedia
+..    pip install QApedia
 
 .. _Releases: https://github.com/JessicaSousa/QApedia/releases

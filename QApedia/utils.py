@@ -1,7 +1,7 @@
 """Este módulo contém o conjunto de operações utilizadas pelos módulos
 principais como por exemplo, o método
-:func:`qapedia.io.load_templates` que utiliza o método
-:func:`qapedia.utils.extract_variables` desse módulo para extrair o conjunto
+:func:`QApedia.io.load_templates` que utiliza o método
+:func:`QApedia.utils.extract_variables` desse módulo para extrair o conjunto
 de variáveis presentes na query geradora (``generator_query``).
 
 Neste módulo, pode-se encontrar as seguintes funções:
@@ -87,7 +87,7 @@ def convert_prefixes_to_list(prefixes):
     --------
     .. code-block:: python
 
-        >>> from qapedia.utils import convert_prefixes_to_list
+        >>> from QApedia.utils import convert_prefixes_to_list
         >>> prefixes = "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\\
         ...             PREFIX yago: <http://yago-knowledge.org/resource/>\\
         ...             PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>\\
@@ -139,7 +139,7 @@ def encode(sparql, prefixes):
         sparql a ser transformada.
     prefixes : list
         lista de prefixos com uris utilizadas na sparql retornadas pela função
-        :func:`qapedia.utils.convert_prefixes_to_list`.
+        :func:`QApedia.utils.convert_prefixes_to_list`.
 
     Returns
     -------
@@ -150,8 +150,8 @@ def encode(sparql, prefixes):
     --------
     .. code-block:: python
 
-        >>> from qapedia.utils import encode
-        >>> from qapedia.utils import convert_prefixes_to_list
+        >>> from QApedia.utils import encode
+        >>> from QApedia.utils import convert_prefixes_to_list
         >>> prefixes = "PREFIX prop: <http://dbpedia.org/property/>\\
         ...             PREFIX dbr: <http://dbpedia.org/resource/>"
         >>> query = "ASK {\\n\\
@@ -201,16 +201,16 @@ def _revert_encoded_symbols(sparql):
 
 def decode(sparql_encoded, prefixes):
     """Dada uma sparql que foi codificada pela função
-    :func:`qapedia.utils.encode`. O método ``decode`` substuir os termos
+    :func:`QApedia.utils.encode`. O método ``decode`` substuir os termos
     codificados por símbolos válidos da consulta sparql.
 
     Parameters
     ----------
     sparql_encoded : str
-        sparql transformada após passar por :func:`qapedia.utils.encode`.
+        sparql transformada após passar por :func:`QApedia.utils.encode`.
     prefixes : list
         lista de prefixos com uris utilizadas na sparql retornadas pela função
-        :func:`qapedia.utils.convert_prefixes_to_list`.
+        :func:`QApedia.utils.convert_prefixes_to_list`.
 
     Returns
     -------
@@ -221,8 +221,8 @@ def decode(sparql_encoded, prefixes):
     --------
     .. code-block:: python
 
-        >>> from qapedia.utils import decode
-        >>> from qapedia.utils import convert_prefixes_to_list
+        >>> from QApedia.utils import decode
+        >>> from QApedia.utils import convert_prefixes_to_list
         >>> prefixes = "PREFIX prop: <http://dbpedia.org/property/>\\
         ...             PREFIX dbr: <http://dbpedia.org/resource/>"
         >>> list_of_prefixes = convert_prefixes_to_list(prefixes)

@@ -1,29 +1,29 @@
-qapedia package
+QApedia package
 ===============
 
 Módulos
 ----------
 
-qapedia.generator module
+QApedia.generator module
 ------------------------
 
-.. automodule:: qapedia.generator
+.. automodule:: QApedia.generator
     :members:
     :undoc-members:
     :show-inheritance:
 
-qapedia.io module
+QApedia.io module
 -----------------
 
-.. automodule:: qapedia.io
+.. automodule:: QApedia.io
     :members:
     :undoc-members:
     :show-inheritance:
 
-qapedia.utils module
+QApedia.utils module
 --------------------
 
-.. automodule:: qapedia.utils
+.. automodule:: QApedia.utils
     :members:
     :undoc-members:
     :show-inheritance:
@@ -32,7 +32,7 @@ qapedia.utils module
 .. Module contents
 .. ---------------
 
-.. .. automodule:: qapedia
+.. .. automodule:: QApedia
 ..     :members:
 ..     :undoc-members:
 ..     :show-inheritance:

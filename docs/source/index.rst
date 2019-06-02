@@ -24,7 +24,7 @@ junção dos termos QA de *Question-Answering* e *pedia* da palavra wikipedia.
     :maxdepth: 2
     :caption: Documentação dos módulos
 
-    qapedia
+    QApedia
 .. ***********************************
 .. Welcome to qapedia's documentation!
 .. ***********************************

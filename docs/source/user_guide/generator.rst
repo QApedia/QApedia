@@ -37,7 +37,7 @@ Para isso, realizamos a chamada da função de ajuste da ``generator_query``:
 
 .. code-block:: python
 
-    >>> from qapedia.generator import adjust_generator_query
+    >>> from QApedia.generator import adjust_generator_query
     >>> gquery = adjust_generator_query(gquery, variables)
     >>> print(gquery)
     select distinct ?a ?la where {?a rdfs:label ?la. FILTER(lang(?la) = 'pt').  ?a dbo:author dbr:Yoshihiro_Togashi }
@@ -49,7 +49,7 @@ não precisamos mudar valor padrão da função
 
 .. code-block:: python
 
-    >>> from qapedia.generator import perform_query
+    >>> from QApedia.generator import perform_query
     >>> results = perform_query(gquery)
     >>> for instance in results:
     ...     print("%s: %s" %(instance["la"].value, instance["a"].value))
@@ -63,7 +63,7 @@ utilizando o método ``get_results_of_generator_query``.
 
 .. code-block:: python
 
-    >>> from qapedia.generator import get_results_of_generator_query
+    >>> from QApedia.generator import get_results_of_generator_query
     >>> generator_query = "select distinct ?a where { ?a dbo:author dbr:Yoshihiro_Togashi }"
     >>> variables = ["a"]
     >>> results = get_results_of_generator_query(generator_query, variables)
@@ -90,7 +90,7 @@ Para a geração dos pares de questão-sparql, utilizamos a função
 
 .. code-block:: python
 
-    >>> from qapedia.generator import extract_pairs
+    >>> from QApedia.generator import extract_pairs
     >>> pairs = extract_pairs(results, template, 2)
     >>> for pair in pairs:
     ...     print(pair["question"])
@@ -108,8 +108,8 @@ Para a geração dos pares de questão-sparql, utilizamos a função
 
 .. code-block:: python
 
-    >>> from qapedia.generator import extract_pairs
-    >>> from qapedia.utils import convert_prefixes_to_list
+    >>> from QApedia.generator import extract_pairs
+    >>> from QApedia.utils import convert_prefixes_to_list
     >>> prefixes = "PREFIX dbr:<http://dbpedia.org/resource/>\
     ...             PREFIX dbo:<http://dbpedia.org/ontology/>"
     >>> list_of_prefixes = convert_prefixes_to_list(prefixes)
@@ -134,7 +134,7 @@ válido novamente, basta utilizar o ``decode``.
 
 .. code-block:: python
 
-    >>> from qapedia.utils import encode, decode
+    >>> from QApedia.utils import encode, decode
     >>> for pair in pairs:
     ...     encoded = encode(pair["sparql"], list_of_prefixes)
     ...     decoded = decode(encoded, list_of_prefixes)

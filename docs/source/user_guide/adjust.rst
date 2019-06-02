@@ -18,12 +18,12 @@ necessitamos do nome desses recursos em linguagem natural, para isso, são
 extraídas a propriedade **rdfs:label** de cada uma dessas URIs. As
 *generator_query* definida em nosso template não possui esses campos, então
 para isso pode ser utilizada a função
-:func:`qapedia.generator.adjust_generator_query` que irá inserir as variáveis
+:func:`QApedia.generator.adjust_generator_query` que irá inserir as variáveis
 ``la`` e ``lb`` que correspondem as *labels* extraídas sobre cada recurso.
 
 .. code-block:: python
 
-    >>> from qapedia import generator
+    >>> from QApedia import generator
     >>> generator_query = "select distinct ?a ?b where {"\
     ...                   "?uri <http://dbpedia.org/property/notableworks> ?a . "\
     ...                   "?uri <http://dbpedia.org/property/notableworks> ?b . "\

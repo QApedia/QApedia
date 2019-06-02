@@ -1,5 +1,5 @@
 import pytest
-import qapedia.generator
+import QApedia.generator
 
 
 def generator_query_test_data():
@@ -117,7 +117,7 @@ def perform_query_test_failure_data():
 
 def test_adjust_generator_query(adjust_generator_query_example):
     generator_query, variables, expected = adjust_generator_query_example
-    assert qapedia.generator.adjust_generator_query(generator_query,
+    assert QApedia.generator.adjust_generator_query(generator_query,
                                                     variables) == expected
 
 
@@ -126,14 +126,14 @@ def test_adjust_generator_query_failure():
     variables = ["a"]
     expected = r".*SELECT ... WHERE{...}.*"
     with pytest.raises(Exception, match=expected):
-        qapedia.generator.adjust_generator_query(generator_query, variables)
+        QApedia.generator.adjust_generator_query(generator_query, variables)
 
 
 @pytest.mark.parametrize('query, endpoint, expected',
                          perform_query_test_data())
 def test_perform_query(query, endpoint, expected):
     assert type(
-                qapedia.generator.perform_query(query,
+                QApedia.generator.perform_query(query,
                                                 endpoint=endpoint)) == expected
 
 
@@ -142,7 +142,7 @@ def test_perform_query(query, endpoint, expected):
 def test_perform_query_failure(query, endpoint, expected):
     query = "ask where{ a dbo:author dbr:Yoshihiro_Togashi}"
     with pytest.raises(Exception, match=expected):
-        qapedia.generator.perform_query(query, endpoint=endpoint)
+        QApedia.generator.perform_query(query, endpoint=endpoint)
 
 
 @pytest.mark.parametrize('gquery, variables, expected, use_cache',
@@ -150,8 +150,8 @@ def test_perform_query_failure(query, endpoint, expected):
 def test_get_results_of_generator_query(gquery, variables, expected,
                                         use_cache):
     if(use_cache):
-        qapedia.generator._cache[gquery] = []
-    assert type(qapedia.generator.get_results_of_generator_query(gquery,
+        QApedia.generator._cache[gquery] = []
+    assert type(QApedia.generator.get_results_of_generator_query(gquery,
                                                                  variables)
                 ) == expected
 
@@ -161,6 +161,6 @@ def test_get_results_of_generator_query(gquery, variables, expected,
                          extract_pairs_test_data())
 def test_extract_pairs(results, template, examples,
                        list_of_prefixes, expected):
-    assert type(qapedia.generator.extract_pairs(results, template,
+    assert type(QApedia.generator.extract_pairs(results, template,
                                                 examples,
                                                 list_of_prefixes)) == expected

@@ -20,7 +20,7 @@ import re
 from random import shuffle
 from SPARQLWrapper import SPARQLWrapper2, SPARQLExceptions, SmartWrapper
 from urllib.error import HTTPError
-from qapedia import utils
+from QApedia import utils
 from os.path import basename
 
 __all__ = ['adjust_generator_query', 'perform_query',
@@ -160,7 +160,7 @@ def perform_query(query, prefixes="", endpoint="http://dbpedia.org/sparql"):
     --------
     .. code-block:: python
 
-        >>> from qapedia.generator import perform_query
+        >>> from QApedia.generator import perform_query
         >>> query = "SELECT * WHERE {"\\
         ...         "?manga a dbo:Manga ."\\
         ...         "?manga rdfs:label ?nome ."\\
@@ -239,7 +239,7 @@ def extract_pairs(bindings, template, number_of_examples=500,
                   list_of_prefixes=[]):
     """Realiza a extração do conjunto de pares  de questão-sparql
     correspondentes obtidos pelo método
-    :func:`qapedia.generator.get_bindings_of_generator_query`.
+    :func:`QApedia.generator.get_bindings_of_generator_query`.
 
     Parameters
     ----------
@@ -253,7 +253,7 @@ def extract_pairs(bindings, template, number_of_examples=500,
         padrão é 500.
     list_of_prefixes: list, optional
         Corresponde a lista de prefixos obtida através do método
-        :func:`qapedia.utils.convert_prefixes_to_list`, onde os prefixos devem
+        :func:`QApedia.utils.convert_prefixes_to_list`, onde os prefixos devem
         ser os mesmos que foram utilizados na função que gerou os bindings.
         Se não estiver usando prefixos, o uso desse parâmetro não é
         necessário, o valor padrão é [].
@@ -267,8 +267,8 @@ def extract_pairs(bindings, template, number_of_examples=500,
     --------
     .. code-block:: python
 
-        >>> from qapedia.generator import extract_pairs
-        >>> from qapedia.generator import get_results_of_generator_query
+        >>> from QApedia.generator import extract_pairs
+        >>> from QApedia.generator import get_results_of_generator_query
         >>> template = {"question": "Yoshihiro Togashi escreveu <A>?",
         ...             "query": "ask where {"\\
         ...                      "dbr:Yoshihiro_Togashi ^ dbo:author <A>}",

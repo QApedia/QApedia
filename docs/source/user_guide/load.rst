@@ -5,10 +5,10 @@ Carregue o pacote para poder utilizar suas funcionalidades
 
 .. code-block:: python
 
-    >>> import qapedia
+    >>> import QApedia
 
 Você pode carregar o seu dataset utilizando a função
-:func:`qapedia.io.load_templates` presente no pacote. O arquivo do dataset
+:func:`QApedia.io.load_templates` presente no pacote. O arquivo do dataset
 deve estar no formato csv, a primeira linha deve conter o nome das colunas.
 Esses nomes devem ser os mesmos que são mostrados no :doc:`../tutorial`. São
 eles:
@@ -37,7 +37,7 @@ leitura do conjunto de dados e são disponibilizadas na coluna **variables**.
 
 .. code-block:: python
 
-    >>> from qapedia import io
+    >>> from QApedia import io
     >>> templates = io.load_templates("templates.csv")
     >>> templates.head()
                                             question  ... variables
