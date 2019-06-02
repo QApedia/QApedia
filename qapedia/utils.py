@@ -10,6 +10,11 @@ Neste módulo, pode-se encontrar as seguintes funções:
       da query geradora.
     * convert_prefixes_to_list - dado o conjunto de prefixos, converte a
       string em uma lista de tuplas.
+    * encode - dada uma sparql realiza a codificação da query transformando
+      alguns símbolos em texto.
+    * decode - dada uma sparql transformada por meio do ``encode`` realiza a
+      transformação de inversa, de modo a substituir o texto por operações
+      válidas.
 """
 import re
 
@@ -184,7 +189,7 @@ def decode(sparql_encoded, prefixes):
         ASK {
             dbr:Amazon_River prop:length ?amazon .
             dbr:Nile prop:length ?nile .
-            FILTER(?amazon > ?nile) . 
+            FILTER(?amazon > ?nile) .
             }
     """
     sparql = sparql_encoded
