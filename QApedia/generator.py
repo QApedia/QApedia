@@ -294,17 +294,17 @@ resource/Hunter_×_Hunter}'
         my_bindings = my_bindings[0:number_of_examples]
 
     pairs = list()
-    query = template['query']
-    question = template['question']
 
     for result in my_bindings:
+        query = template['query']
+        question = template['question']
         # Para cada variável preencher as lacunas com os resultados da busca
         for variable in template['variables']:
-            current_question = question.replace('<%s>' % variable.upper(),
+            question = question.replace('<%s>' % variable.upper(),
                                                 result[f"l{variable}"].value)
-            current_query = query.replace('<%s>' % variable.upper(),
+            query = query.replace('<%s>' % variable.upper(),
                                           _adjust_uri(
                                           result[variable].value,
                                           list_of_prefixes))
-        pairs.append({'sparql': current_query, 'question': current_question})
+        pairs.append({'sparql': query, 'question': question})
     return pairs
