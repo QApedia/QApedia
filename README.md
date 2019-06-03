@@ -1,12 +1,13 @@
 # <img alt="QApedia" src="docs/source/_static/logo.png" height="80">
 
-[![Travis](https://img.shields.io/travis/JessicaSousa/qapedia/master.svg?label=Travis%20CI)](
-    https://travis-ci.org/JessicaSousa/qapedia)
-[![Build Status](https://dev.azure.com/qapedia/qapedia/_apis/build/status/jessicasousa.qapedia?branchName=master)](https://dev.azure.com/qapedia/qapedia/_build/latest?definitionId=1&branchName=master)
-[![codecov]( https://codecov.io/gh/JessicaSousa/qapedia/branch/master/graph/badge.svg)](https://codecov.io/gh/JessicaSousa/qapedia)
+[![Travis](https://img.shields.io/travis/QApedia/QApedia/master.svg?label=Travis%20CI)](
+    https://travis-ci.org/QApedia/QApedia)
+[![Build Status](https://dev.azure.com/qapedia/QApedia/_apis/build/status/QApedia.QApedia?branchName=master)](https://dev.azure.com/qapedia/QApedia/_build/latest?definitionId=2&branchName=master)
+[![codecov]( https://codecov.io/gh/QApedia/QApedia/branch/master/graph/badge.svg)](https://codecov.io/gh/QApedia/QApedia)
 [![Documentation Status](https://readthedocs.org/projects/qapedia/badge/?version=latest)](https://qapedia.readthedocs.io/pt/latest/?badge=latest)
-[![GitHub license](https://img.shields.io/github/license/JessicaSousa/qapedia.svg)](https://github.com/JessicaSousa/qapedia/blob/master/LICENSE)
-[![Requirements Status](https://requires.io/github/JessicaSousa/QApedia/requirements.svg?branch=master)](https://requires.io/github/JessicaSousa/QApedia/requirements/?branch=master)
+[![GitHub license](https://img.shields.io/github/license/QApedia/QApedia.svg)](https://github.com/QApedia/QApedia/blob/master/LICENSE)
+![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/QApedia/QApedia.svg)
+
 
 O módulo ``QApedia`` foi desenvolvido em python e realiza a geração de pares de
 questões-sparql com base em um template previamente estabelecido. Para saber
