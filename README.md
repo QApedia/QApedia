@@ -21,12 +21,14 @@ Caso deseje, você pode realizar a instalação do módulo do ``QApedia``,
 primeiramente, dentro da pasta do projeto, você deverá instalar os
 ``requirements.txt`` caso não possua as bibliotecas necessárias para executar o
 ``QApedia``. Em seguida no diretório do QApedia você pode executar o
-``pip install .``.
+``pip install .``. 
 
 ```console
     foo@bar:~/QApedia$ pip install -r requirements.txt
     foo@bar:~/QApedia$ pip install .
 ```
+
+O Download do projeto se encontra disponível na aba [release](https://github.com/QApedia/QApedia/releases) do repositório atual nos formatos *tar.gz* e *zip*.
 
 ## 📚 Documentação
 
@@ -47,10 +49,13 @@ busca SPARQL estão mostrados na figura abaixo.
 ![Virtuoso SPARQL Endpoint](docs/source/_static/SPARQL_Query_Editor.png)
 
 
-No ``QApedia``, o resultado de uma consulta pode ser obtido no formato json
+<!-- No ``QApedia``, o resultado de uma consulta pode ser obtido no formato json
 nesse endpoint através da função
 ``QApedia.generator.get_results_of_generator_query``, no python ele é exibido
-no formato dicionário, conforme mostrado no bloco de código a seguir.
+no formato dicionário, conforme mostrado no bloco de código a seguir. -->
+
+No módulo do ``QApedia``, o resultado de uma consulta pode ser obtido através da função 
+``QApedia.generator.get_results_of_generator_query``, é retornada uma lista contendo o resultado retornado pela consulta, esse resultado corresponde ao campo [*results*][*bindings*] que você pode verificar ao selecionar a opção JSON presente na figura acima.
 
 ```python
 >>> from QApedia import generator
@@ -64,7 +69,7 @@ no formato dicionário, conforme mostrado no bloco de código a seguir.
 ...                         template["variables"],
 ...                         endpoint = "http://dbpedia.org/sparql")
 >>> print(type(results))
-<class 'dict'>
+<class 'list'>
 ```
 Com o resultado obtido em cima da ``generator_query``, a construção dos pares
 questões-sparql podem ser realizados ao chamar a função
@@ -82,7 +87,7 @@ dicionários, onde cada um deles conterá as chaves ``question`` e ``sparql``.
 ...                     template["generator_query"],
 ...                     template["variables"],
 ...                     endpoint = "http://dbpedia.org/sparql")
->>> pairs = generator.extract_pairs(results["results"]["bindings"], template)
+>>> pairs = generator.extract_pairs(results, template)
 >>> len(pairs)
 600
 >>> "sparql" in pairs[0]
@@ -90,3 +95,27 @@ True
 >>> "question" in pairs[0]
 True
 ```
+## 🚧 Informações importantes
+
+* Os pares gerados podem apresentar problemas de concordância. 
+    * Por exemplo, em <Fulana foi autor de que?>, há o problema com o feminino, para resolver isso defina uma pergunta no feminino (autora) e filtre a busca pelo gênero.
+
+* Consultas com problemas na estrutura, por exemplo, falta de "?" antes da variável retornarão a exceção ``"QueryBadFormed"``.
+
+* Consultas que demandam um longo tempo de resposta no servidor serão automaticamente abortadas e uma exceção será capturada.
+
+* A *generator_query* possui o formato SELECT ... WHERE, caso não esteja nesse formato, uma exceção é gerada informando que a consulta não é do tipo SELECT.
+
+    * Não importa o que se encontra dentro do WHERE, contanto que esteja num formato válido.
+    * As variáveis do tipo ?a ?b ?c .. ?y ?z são utilizadas no preenchimento das lacunas do par "questão-sparql", sendo elas equivalentes as campos \<A\> \<B\> \<C\> ... \<Y\> \<Z\> presente nesses pares.
+
+## 📏 Testes
+
+Os testes do pacote foram construídos utilizando o pytest e é possível verificá-los executando os seguintes comandos dentro da pasta do QApedia. 
+
+```console
+foo@bar:~/ pip install pytest
+foo@bar:~/ pytest --cov-report term --cov=QApedia tests/
+```
+
+Para a versão 0.1.0 é esperado que os testes passem com o total de 99%.
