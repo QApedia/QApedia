@@ -36,7 +36,7 @@ presentes no select da **generator_query** são extraídas no processo de
 leitura do conjunto de dados e são disponibilizadas na coluna **variables**.
 No exemplo a seguir, podemos ver as primeiras linhas do arquivo templates.csv_.
 
-.. _templates.csv: https://bit.ly/2ItCAPF
+.. _templates.csv: https://bit.ly/2IuVZzM
 
 .. code-block:: python
 
