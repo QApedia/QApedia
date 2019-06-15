@@ -23,8 +23,12 @@ from urllib.error import HTTPError
 from QApedia import utils
 from os.path import basename
 
-__all__ = ['adjust_generator_query', 'perform_query',
-           'get_results_of_generator_query', 'extract_pairs']
+__all__ = [
+    "adjust_generator_query",
+    "perform_query",
+    "get_results_of_generator_query",
+    "extract_pairs",
+]
 
 
 _cache = {}
@@ -58,12 +62,12 @@ def _extract_bindings(result):
     """Método auxiliar utilizado em ``perform_query`` que tem como objetivo
     retornar os bindings/boolean retornados pela busca.
     """
-    if(type(result) == SmartWrapper.Bindings):
+    if type(result) == SmartWrapper.Bindings:
         return result.bindings
-    if 'boolean' in result:
-        result = result['boolean']
+    if "boolean" in result:
+        result = result["boolean"]
     else:
-        result = result['results']['bindings']
+        result = result["results"]["bindings"]
     return result
 
 
@@ -122,9 +126,9 @@ def adjust_generator_query(generator_query, variables, lang="pt"):
         if not variables:
             return generator_query
         # first_piece: antes do where, last_piece: depois do where
-        first_piece, inside_where, last_piece,  = valid[0]
-        first_piece += ''.join(map("?l{:} ".format, variables))
-        inside_where = ''.join(map(label_query, variables)) + inside_where
+        first_piece, inside_where, last_piece, = valid[0]
+        first_piece += "".join(map("?l{:} ".format, variables))
+        inside_where = "".join(map(label_query, variables)) + inside_where
         # nova query construída com os campos de labels
         new_query = f"select{first_piece}where {{{inside_where}}}{last_piece}"
         return new_query
@@ -195,9 +199,13 @@ def perform_query(query, prefixes="", endpoint="http://dbpedia.org/sparql"):
     return result
 
 
-def get_results_of_generator_query(generator_query, variables, prefixes="",
-                                   endpoint="http://dbpedia.org/sparql",
-                                   lang="pt"):
+def get_results_of_generator_query(
+    generator_query,
+    variables,
+    prefixes="",
+    endpoint="http://dbpedia.org/sparql",
+    lang="pt",
+):
 
     """Dada uma ```generator_query``` é retornado um conjunto de
     resultados obtidos ao executar a query no endpoint especificado.
@@ -235,8 +243,9 @@ def get_results_of_generator_query(generator_query, variables, prefixes="",
     return results
 
 
-def extract_pairs(bindings, template, number_of_examples=500,
-                  list_of_prefixes=[]):
+def extract_pairs(
+    bindings, template, number_of_examples=500, list_of_prefixes=[]
+):
     """Realiza a extração do conjunto de pares  de questão-sparql
     correspondentes obtidos pelo método
     :func:`QApedia.generator.get_bindings_of_generator_query`.
@@ -296,15 +305,16 @@ resource/Hunter_×_Hunter}'
     pairs = list()
 
     for result in my_bindings:
-        query = template['query']
-        question = template['question']
+        query = template["query"]
+        question = template["question"]
         # Para cada variável preencher as lacunas com os resultados da busca
-        for variable in template['variables']:
-            question = question.replace('<%s>' % variable.upper(),
-                                                result[f"l{variable}"].value)
-            query = query.replace('<%s>' % variable.upper(),
-                                          _adjust_uri(
-                                          result[variable].value,
-                                          list_of_prefixes))
-        pairs.append({'sparql': query, 'question': question})
+        for variable in template["variables"]:
+            question = question.replace(
+                "<%s>" % variable.upper(), result[f"l{variable}"].value
+            )
+            query = query.replace(
+                "<%s>" % variable.upper(),
+                _adjust_uri(result[variable].value, list_of_prefixes),
+            )
+        pairs.append({"sparql": query, "question": question})
     return pairs

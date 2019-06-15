@@ -18,13 +18,10 @@ mais sobre o funcionamento do pacote, você pode ler sobre ele na [documentaçã
 
 
 Caso deseje, você pode realizar a instalação do módulo do ``QApedia``,
-primeiramente, dentro da pasta do projeto, você deverá instalar os
-``requirements.txt`` caso não possua as bibliotecas necessárias para executar o
-``QApedia``. Em seguida no diretório do QApedia você pode executar o
+primeiramente, dentro da pasta do projeto, você pode executar o
 ``pip install .``. 
 
 ```console
-    foo@bar:~/QApedia$ pip install -r requirements.txt
     foo@bar:~/QApedia$ pip install .
 ```
 
@@ -32,69 +29,33 @@ O Download do projeto se encontra disponível na aba [release](https://github.co
 
 ## 📚 Documentação
 
-A documentação do ``QApedia`` se encontra disponível em qapedia.rtfd.io.
+A documentação do ``QApedia`` se encontra disponível em [qapedia.rtfd.io](https://qapedia.readthedocs.io/pt/).
 
 Esse pacote contempla as seguintes operações:
 
 * Permite a busca de uma consulta *SPARQL* em um endpoint especificado.
 * Realiza a geração de pares de questões-sparql sobre a dbpedia a partir de um template previamente estabelecido.
 
-## 📝 Exemplo de uso
+## 📝 Exemplo inicial
 
+Após ter instalado o QApedia, é possível executar um exemplo disponível no pacote para a geração de pares questão-sparql. No console abaixo, é definido uma quantidade máxima de dez pares por template e esse conjunto gerado é salvo no arquivo chamado "pares.csv".
 
-Ao acessar o link http://dbpedia.org/sparql, você é levado a seguinte tela do
-Endpoint SPARQL Virtuoso. Alguns dos formatos dos resultados gerados através da
-busca SPARQL estão mostrados na figura abaixo.
-
-![Virtuoso SPARQL Endpoint](docs/source/_static/SPARQL_Query_Editor.png)
-
-
-<!-- No ``QApedia``, o resultado de uma consulta pode ser obtido no formato json
-nesse endpoint através da função
-``QApedia.generator.get_results_of_generator_query``, no python ele é exibido
-no formato dicionário, conforme mostrado no bloco de código a seguir. -->
-
-No módulo do ``QApedia``, o resultado de uma consulta pode ser obtido através da função 
-``QApedia.generator.get_results_of_generator_query``, é retornada uma lista contendo o resultado retornado pela consulta, esse resultado corresponde ao campo [*results*][*bindings*] que você pode verificar ao selecionar a opção JSON presente na figura acima.
-
-```python
->>> from QApedia import generator
->>> template = {"question": "latitude de <A>",
-...             "query": "select ?a where { <A> geo:lat ?a }",
-...             "generator_query": "select distinct(?a) where"\
-...             "{ ?a geo:lat [] }",
-...             "variables": ["a"]}
->>> results = generator. get_results_of_generator_query(
-...                         template["generator_query"],
-...                         template["variables"],
-...                         endpoint = "http://dbpedia.org/sparql")
->>> print(type(results))
-<class 'list'>
+```console
+foo@bar:~$ qapedia -n 10 -v True -o pares.csv
+Executando template da linha 0
+Executando template da linha 1
+Executando template da linha 2
+Executando template da linha 3
+Executando template da linha 4
+foo@bar:~$ 
 ```
-Com o resultado obtido em cima da ``generator_query``, a construção dos pares
-questões-sparql podem ser realizados ao chamar a função
-``QApedia.generator.extract_pairs``, o resultado será exibido como uma lista de
-dicionários, onde cada um deles conterá as chaves ``question`` e ``sparql``.
 
-```python
->>> from QApedia import generator
->>> template = {"question": "latitude de <A>",
-...             "query": "select ?a where { <A> geo:lat ?a }",
-...             "generator_query": "select distinct(?a) where"\
-...             "{ ?a geo:lat [] }",
-...             "variables": ["a"]}
->>> results = generator.get_results_of_generator_query(
-...                     template["generator_query"],
-...                     template["variables"],
-...                     endpoint = "http://dbpedia.org/sparql")
->>> pairs = generator.extract_pairs(results, template)
->>> len(pairs)
-600
->>> "sparql" in pairs[0]
-True
->>> "question" in pairs[0]
-True
+Para verificar as opções disponíveis no comando ``qapedia``, apenas coloque ``-h`` ou ``--help`` como argumento. Caso deseje criar um conjunto de pares para um arquivo específico, informe o caminho do arquivo contendo o conjunto de templates.
+
+```console
+foo@bar:~$ qapedia -tfile templates.csv -n 10 -v True -o pares.csv
 ```
+
 ## 🚧 Informações importantes
 
 * Os pares gerados podem apresentar problemas de concordância. 

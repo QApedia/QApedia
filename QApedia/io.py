@@ -9,10 +9,10 @@ Neste módulo, pode-se encontrar as seguintes funções:
 from QApedia.utils import extract_variables
 import pandas as pd
 
-__all__ = ['load_templates']
+__all__ = ["load_templates"]
 
 
-def load_templates(filepath, delimiter=';'):
+def load_templates(filepath, delimiter=";"):
     """A função load_templates, carrega o conjunto de templates a partir de um
     arquivo csv. O dado deve possuir um campo ``generator_query`` que servirá
     para realizar buscas que preencherão as lacunas presentes nos campos
@@ -53,7 +53,10 @@ def load_templates(filepath, delimiter=';'):
         [5 rows x 4 columns]
 
     """
-    def get_variables(row): return extract_variables(row["generator_query"])
+
+    def get_variables(row):
+        return extract_variables(row["generator_query"])
+
     templates = pd.read_csv(filepath, sep=";")
     templates["variables"] = templates.apply(get_variables, axis=1)
     return templates

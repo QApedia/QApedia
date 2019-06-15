@@ -19,21 +19,22 @@ Neste módulo, pode-se encontrar as seguintes funções:
 import re
 
 
-__all__ = ['extract_variables', 'convert_prefixes_to_list', 'encode', 'decode']
+__all__ = ["extract_variables", "convert_prefixes_to_list", "encode", "decode"]
 
-_symbols_and_its_equivalent = [("{", " bracket_open "),
-                               ("}", " bracket_close "),
-                               ("?", "var_"),
-                               ("!=", " not_equal_to "),
-                               (">=", " greater_than_or_equal_to "),
-                               ("<=", " less_than_or_equal_to "),
-                               ("=", " equal_to "),
-                               (">", " greater_than "),
-                               ("<", " less_than "),
-                               ("&&", " and "),
-                               ("||", " or "),
-                               ("!", " not ")
-                               ]
+_symbols_and_its_equivalent = [
+    ("{", " bracket_open "),
+    ("}", " bracket_close "),
+    ("?", "var_"),
+    ("!=", " not_equal_to "),
+    (">=", " greater_than_or_equal_to "),
+    ("<=", " less_than_or_equal_to "),
+    ("=", " equal_to "),
+    (">", " greater_than "),
+    ("<", " less_than "),
+    ("&&", " and "),
+    ("||", " or "),
+    ("!", " not "),
+]
 
 
 def extract_variables(generator_query):
@@ -60,7 +61,7 @@ def extract_variables(generator_query):
         >>> print(variables)
         ['a']
     """
-    variables = re.findall('^(.+?)where', generator_query, re.IGNORECASE)
+    variables = re.findall("^(.+?)where", generator_query, re.IGNORECASE)
     if variables:
         variables = re.findall(r"\?(\w)", variables[0])
     if not variables:
@@ -125,7 +126,7 @@ def _replace_symbols_with_text(sparql):
     for symbol, text in _symbols_and_its_equivalent:
         sparql = sparql.replace(symbol, text)
     sparql = re.sub(r"\.(\B|filter)", r" sep_dot \1", sparql, flags=re.I)
-    sparql = re.sub(r'\;(\B|filter)', r" sep_semicolon \1", sparql, flags=re.I)
+    sparql = re.sub(r"\;(\B|filter)", r" sep_semicolon \1", sparql, flags=re.I)
     return sparql
 
 
@@ -172,7 +173,7 @@ def encode(sparql, prefixes):
     for prefix, uri in prefixes:
         encoding = prefix.replace(":", "_")
         sparql = sparql.replace(prefix, encoding)
-        sparql = re.sub(f"<{uri}(.*?)>", fr'{encoding}\1', sparql)
+        sparql = re.sub(f"<{uri}(.*?)>", fr"{encoding}\1", sparql)
     # Realizar substituição dos caracteres da consulta por texto.
     sparql = _replace_symbols_with_text(sparql)
     return sparql

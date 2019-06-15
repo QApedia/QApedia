@@ -12,7 +12,7 @@ with open(path.join(this_directory, "LICENSE")) as f:
     license = f.read()
 
 setup(name="QApedia",
-      version="v0.1.0-alpha",
+      version="v0.1.1-alpha",
       description="Geração de pares questão-sparql",
       long_description=README,
       long_description_content_type="text/markdown",
@@ -33,6 +33,9 @@ setup(name="QApedia",
         ],
       python_requires=">=3.6",
       packages=find_packages(),
+      include_package_data=True,
       install_requires=["SPARQLWrapper", "pandas", "lxml"],
       tests_require=["pytest"],
+      entry_points={"console_scripts": ["qapedia=QApedia.__main__:main"]},
+      package_data = {'QApedia': ['data/*']},
       zip_safe=False)
