@@ -7,9 +7,12 @@ Neste módulo, pode-se encontrar as seguintes funções:
   templates utilizados para a geração de perguntas-queries.
 """
 from QApedia.utils import extract_variables
+from QApedia.utils import convert_prefixes_to_list
+from QApedia.generator import build_pairs_from_template
 import pandas as pd
+import csv
 
-__all__ = ["load_templates"]
+__all__ = ["load_templates", "load_prefixes"]
 
 
 def load_templates(filepath, delimiter=";"):
@@ -60,3 +63,48 @@ def load_templates(filepath, delimiter=";"):
     templates = pd.read_csv(filepath, sep=";")
     templates["variables"] = templates.apply(get_variables, axis=1)
     return templates
+
+def load_prefixes(filepath):
+    """Dado um arquivo txt contendo os prefixos utilizados na SPARQL, é
+    devolvida uma string contendo os prefixos e uma lista de tuplas contendo
+    os prefixos.
+    
+    Parameters
+    ----------
+    filepath : str
+        Caminho do arquivo txt contendo o conjunto de prefixos.
+    
+    Returns
+    -------
+    tuple of str
+        Uma tupla contendo os prefixos carregados na forma de string e uma
+        lista de tuplas, onde a primeira posição é o nome dado ao URI e a segunda
+        contém a URI correspondente.
+
+    Examples
+    --------
+
+    .. code-block:: python
+
+        >>> from QApedia.io import load_prefixes
+        >>> filename = "prefixes.txt"
+        >>> prefixes = load_prefixes(filename)
+        >>> for uri_name, uri in prefixes[1]:
+        ...     print(uri_name, uri)
+        ... 
+        owl: http://www.w3.org/2002/07/owl#
+        xsd: http://www.w3.org/2001/XMLSchema#
+        rdfs: http://www.w3.org/2000/01/rdf-schema#
+        rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+        foaf: http://xmlns.com/foaf/0.1/
+        dc: http://purl.org/dc/elements/1.1/
+        dbpedia2: http://dbpedia.org/property/
+        dbpedia: http://dbpedia.org/
+        skos: http://www.w3.org/2004/02/skos/core#
+    """
+    f = open(filepath, "r")
+    lines = f.readlines()
+    f.close()
+    prefixes = "\n".join(line.rstrip() for line in lines)
+    list_of_prefixes = convert_prefixes_to_list(prefixes)
+    return prefixes, list_of_prefixes
