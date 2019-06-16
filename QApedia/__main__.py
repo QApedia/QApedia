@@ -14,7 +14,7 @@ More information is available at:
 
 Version:
 --------
-- QApedia v0.1.1-alpha
+- QApedia v0.2.0-alpha
 
 Arguments:
 ---------
