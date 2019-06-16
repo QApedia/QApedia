@@ -37,14 +37,6 @@ def get_data(path):
     return os.path.join(_ROOT, "data", path)
 
 
-def load_prefixes(filename):
-    f = open(filename, "r")
-    lines = f.readlines()
-    f.close()
-    prefixes = "\n".join(line.rstrip() for line in lines)
-    return prefixes
-
-
 def _make_parser():
     p = argparse.ArgumentParser(
         description=__doc__,
@@ -56,7 +48,7 @@ def _make_parser():
         "uma URL, por exemplo. Esse caminho corresponde ao arquivo contendo "
         "o conjunto de templates. Se nenhum valor for passado, é executado "
         "um arquivo de exemplo.",
-        default=None,
+        default=get_data("example.csv"),
     )
     p.add_argument(
         "-o",
@@ -64,7 +56,7 @@ def _make_parser():
         help="Corresponde ao caminho do arquivo de saída onde será salvo os "
         "pares de questão-sparql gerados. Se nenhum caminho for especificado,"
         " o resultado será salvo no arquivo output.txt",
-        default=None,
+        default="output.txt",
     )
     p.add_argument(
         "-d",
@@ -86,7 +78,7 @@ def _make_parser():
         help="Caminho do arquivo txt contendo os prefixos utilizados, caso "
         "nenhum arquivo seja especificado são utilizados os mesmos prefixos"
         " presentes em http://dbpedia.org/snorql/",
-        default=None,
+        default=get_data("prefixes.txt"),
     )
     p.add_argument(
         "-e",
@@ -114,48 +106,30 @@ def main():
     parser = _make_parser()
     args = parser.parse_args()
 
-    # Parâmetros defaults
-    template_file = get_data("example.csv")
-    prefixes_file = get_data("prefixes.txt")
-    output_file = "output.txt"
-
-    if args.tfile is not None:
-        template_file = args.tfile
-    if args.prefixes is not None:
-        prefixes_file = args.prefixes
-    if args.output is not None:
-        output_file = args.output
-
     # Carregar lista de prefixos
-    prefixes = load_prefixes(prefixes_file)
-    list_of_prefixes = utils.convert_prefixes_to_list(prefixes)
+    prefixes, list_of_prefixes = io.load_prefixes(args.prefixes)
 
     # Carregar arquivo contendo os templates
-    templates = io.load_templates(template_file, args.delimiter)
+    templates = io.load_templates(args.tfile, args.delimiter)
 
-    with open(output_file, "w") as csv_file:
+    with open(args.output, "w") as csv_file:
         writer = csv.writer(csv_file, delimiter=args.delimiter)
         writer.writerow(["question", "sparql", "template_id"])
         for index, template in templates.iterrows():
             if args.verbose:
                 print("Executando template da linha %d" % index)
             # Realizar a busca e construção dos pares questão-sparql
-            results = QApedia.get_results_of_generator_query(
-                template["generator_query"],
-                template["variables"],
-                prefixes=prefixes,
-                endpoint=args.endpoint,
-                lang=args.lang.lower(),
-            )
-            pairs = QApedia.extract_pairs(
-                results,
+            pairs = QApedia.build_pairs_from_template(
                 template,
-                number_of_examples=args.number,
-                list_of_prefixes=list_of_prefixes,
+                prefixes,
+                list_of_prefixes,
+                args.endpoint,
+                args.number,
+                args.lang,
             )
             for pair in pairs:
                 writer.writerow([pair["question"], pair["sparql"], str(index)])
-
+        csv_file.close()
 
 if __name__ == "__main__":
     main()
