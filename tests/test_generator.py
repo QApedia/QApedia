@@ -121,12 +121,19 @@ def test_adjust_generator_query(adjust_generator_query_example):
                                                     variables) == expected
 
 
-def test_adjust_generator_query_failure():
-    generator_query = "ask where{?a dbo:author dbr:Yoshihiro_Togashi}"
-    variables = ["a"]
-    expected = r".*SELECT ... WHERE{...}.*"
+def generator_query_failure_data():
+    test1 = ("select where ?a dbo:author dbr:Yoshihiro_Togashi}",
+             ["a"], r".*SELECT ... WHERE{...}.*")
+    test2 = ("select where ?a {dbo:author dbr:Yoshihiro_Togashi",
+             ["a"], r".*SELECT ... WHERE{...}.*")
+    return [test1, test2]
+
+
+@pytest.mark.parametrize('query, variables, expected',
+                         generator_query_failure_data())
+def test_adjust_generator_query_failure(query, variables, expected):
     with pytest.raises(Exception, match=expected):
-        QApedia.generator.adjust_generator_query(generator_query, variables)
+        QApedia.generator.adjust_generator_query(query, variables)
 
 
 @pytest.mark.parametrize('query, endpoint, expected',
@@ -164,3 +171,13 @@ def test_extract_pairs(results, template, examples,
     assert type(QApedia.generator.extract_pairs(results, template,
                                                 examples,
                                                 list_of_prefixes)) == expected
+
+
+@pytest.mark.parametrize(("results, template, examples,"
+                         "list_of_prefixes, expected"),
+                         extract_pairs_test_data())
+def test_build_pairs_from_template(results, template, examples,
+                                   list_of_prefixes, expected):
+    assert type(QApedia.generator.build_pairs_from_template(
+        template
+    )) == expected
