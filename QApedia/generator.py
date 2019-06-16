@@ -28,6 +28,7 @@ __all__ = [
     "perform_query",
     "get_results_of_generator_query",
     "extract_pairs",
+    "build_pairs_from_template"
 ]
 
 
@@ -69,6 +70,27 @@ def _extract_bindings(result):
     else:
         result = result["results"]["bindings"]
     return result
+
+
+def _split_sparql(sparql_query):
+    pattern = r"select(.*)\s*where"
+    first_split = re.findall(pattern, sparql_query, re.IGNORECASE)
+    first_bracket_pos = sparql_query.find("{") + 1
+    if not first_split or not first_bracket_pos:
+        raise Exception("A query não possui formato SELECT ... WHERE{...}")
+    open_bracket_count = close_bracket_count = 0
+    for index, char in enumerate(sparql_query):
+        if char == "{":
+            open_bracket_count+=1
+        if char == "}":
+            close_bracket_count+=1
+            last_bracket_pos = index
+    if open_bracket_count != close_bracket_count:
+        raise Exception("A query não possui formato SELECT ... WHERE{...}")
+    else:
+        second_split = sparql_query[first_bracket_pos:last_bracket_pos]
+        last_split = sparql_query[last_bracket_pos+1:]
+        return first_split[0], second_split, last_split
 
 
 def adjust_generator_query(generator_query, variables, lang="pt"):
@@ -117,21 +139,16 @@ def adjust_generator_query(generator_query, variables, lang="pt"):
     def label_query(v):
         return f"?{v} rdfs:label ?l{v}. FILTER(lang(?l{v}) = '{lang}'). "
 
-    pattern = r"select(.*)where\s*\{([^)]+)\}([^}]+)*$"
-    valid = re.findall(pattern, generator_query, re.IGNORECASE)
-    if not valid:
-        raise Exception("A query não possui formato SELECT ... WHERE{...}")
-    else:
-        # Não se deseja adicionar a variável label na query
-        if not variables:
-            return generator_query
-        # first_piece: antes do where, last_piece: depois do where
-        first_piece, inside_where, last_piece, = valid[0]
-        first_piece += "".join(map("?l{:} ".format, variables))
-        inside_where = "".join(map(label_query, variables)) + inside_where
-        # nova query construída com os campos de labels
-        new_query = f"select{first_piece}where {{{inside_where}}}{last_piece}"
-        return new_query
+    # Não se deseja adicionar a variável label na query
+    if not variables:
+        return generator_query
+    # first_piece: antes do where, last_piece: depois do where
+    first_piece, inside_where, last_piece = _split_sparql(generator_query)
+    first_piece += "".join(map("?l{:} ".format, variables))
+    inside_where = "".join(map(label_query, variables)) + inside_where
+    # nova query construída com os campos de labels
+    new_query = f"select{first_piece}where {{{inside_where}}}{last_piece}"
+    return new_query
 
 
 def perform_query(query, prefixes="", endpoint="http://dbpedia.org/sparql"):
@@ -299,6 +316,8 @@ resource/Hunter_×_Hunter}'
     if not my_bindings:
         return []
 
+    shuffle(my_bindings)
+
     if len(my_bindings) > number_of_examples:
         my_bindings = my_bindings[0:number_of_examples]
 
@@ -317,4 +336,69 @@ resource/Hunter_×_Hunter}'
                 _adjust_uri(result[variable].value, list_of_prefixes),
             )
         pairs.append({"sparql": query, "question": question})
+    return pairs
+
+
+def build_pairs_from_template(template, prefixes="", list_of_prefixes=[],
+                              endpoint="http://dbpedia.org/sparql",
+                              number_of_examples=100, lang="pt"):
+    """Método responsável pela geração de pares questão-sparql com base
+    em um template.
+
+    Parameters
+    ----------
+    template : dict
+        Representa um dicionário contendo os campos ``question``, ``query``,
+        ``generator_query`` e ``variables``.
+    prefixes : str, optional
+        Consiste em uma string contendo os prefixos utilizados pela SPARQL.
+    list_of_prefixes : list of tuple of str, optional, by default ""
+        Lista contendo os prefixos transformados pelo método
+        :func:`QApedia.utils.convert_prefixes_to_list`, by default []
+    endpoint : str, optional
+        Corresponde ao SPARQL endpoint utilizado,
+        by default "http://dbpedia.org/sparql"
+    number_of_examples : int, optional
+        Quantidade máxima de pares gerados por template, by default 100
+    lang : str, optional
+        Idioma utilizado na pergunta do template, by default "pt"
+
+    Returns
+    -------
+    list of dict
+        Lista contendo os pares de questão-sparql gerados para o template
+        especificado.
+
+    Examples
+    --------
+    .. code-block:: python
+
+        >>> from QApedia.generator import build_pairs_from_template
+        >>> from QApedia.utils import convert_prefixes_to_list
+        >>> template = {"question": "Yoshihiro Togashi escreveu <A>?",
+        ...             "query": "ask where {"\\
+        ...                      "dbr:Yoshihiro_Togashi ^ dbo:author <A>}",
+        ...             "generator_query": "select ?a where{"\\
+        ...                          "dbr:Yoshihiro_Togashi ^ dbo:author ?a}",
+        ...             "variables": ["a"]}
+        >>> prefixes = "PREFIX dbr: <http://dbpedia.org/resource/>"\\
+        ...            "PREFIX dbo: <http://dbpedia.org/resource/>"
+        >>> list_of_prefixes = convert_prefixes_to_list(prefixes)
+        >>> pairs = build_pairs_from_template(template, prefixes,
+        ...                                   list_of_prefixes)
+        >>> pairs[2]["question"]
+        'Yoshihiro Togashi escreveu Hunter × Hunter?'
+        >>> pairs[2]["sparql"]
+        'ask where {dbr:Yoshihiro_Togashi ^ dbo:author dbr:Hunter_×_Hunter}'
+    """
+    results = get_results_of_generator_query(
+        template["generator_query"],
+        template["variables"],
+        prefixes=prefixes,
+        endpoint=endpoint,
+        lang=lang.lower(),
+    )
+    pairs = extract_pairs(
+        results, template, number_of_examples, list_of_prefixes
+    )
     return pairs
