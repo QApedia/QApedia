@@ -22,7 +22,7 @@ copyright = '2019, Jessica Sousa'
 author = 'Jessica Sousa'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.0'
+release = 'v0.2.0-alpha'
 
 # The master toctree document.
 master_doc = 'index'
@@ -33,7 +33,7 @@ master_doc = 'index'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc',
-              'sphinx.ext.napoleon'
+              'numpydoc'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
