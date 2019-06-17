@@ -14,7 +14,10 @@ funções:
       entretanto, realiza os ajustes em cima da ``generator_query`` e salva o
       resultado da busca na memória.
     * extract_pairs - realiza a construção dos pares de questão-sparql
-      com base no resultado e template especificados."""
+      com base no resultado e template especificados.
+    * build_pairs_from_template - realiza a construção de pares questão-sparql
+      com base em um template previamente estabelecido.
+"""
 
 import re
 from random import shuffle
@@ -81,9 +84,9 @@ def _split_sparql(sparql_query):
     open_bracket_count = close_bracket_count = 0
     for index, char in enumerate(sparql_query):
         if char == "{":
-            open_bracket_count+=1
+            open_bracket_count += 1
         if char == "}":
-            close_bracket_count+=1
+            close_bracket_count += 1
             last_bracket_pos = index
     if open_bracket_count != close_bracket_count:
         raise Exception("A query não possui formato SELECT ... WHERE{...}")

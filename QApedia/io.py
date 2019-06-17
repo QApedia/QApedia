@@ -5,6 +5,8 @@ Neste módulo, pode-se encontrar as seguintes funções:
 
 * load_templates - realiza a leitura do arquivo contendo o conjunto de
   templates utilizados para a geração de perguntas-queries.
+* load_prefixes - realiza a leitura do arquivo contendo os prefixos utilizados
+  pelas SPARQLs durante a consulta.
 """
 from QApedia.utils import extract_variables
 from QApedia.utils import convert_prefixes_to_list
@@ -64,22 +66,23 @@ def load_templates(filepath, delimiter=";"):
     templates["variables"] = templates.apply(get_variables, axis=1)
     return templates
 
+
 def load_prefixes(filepath):
     """Dado um arquivo txt contendo os prefixos utilizados na SPARQL, é
     devolvida uma string contendo os prefixos e uma lista de tuplas contendo
     os prefixos.
-    
+
     Parameters
     ----------
     filepath : str
         Caminho do arquivo txt contendo o conjunto de prefixos.
-    
+
     Returns
     -------
     tuple of str
         Uma tupla contendo os prefixos carregados na forma de string e uma
-        lista de tuplas, onde a primeira posição é o nome dado ao URI e a segunda
-        contém a URI correspondente.
+        lista de tuplas, onde a primeira posição é o nome dado ao URI e a
+        segunda contém a URI correspondente.
 
     Examples
     --------
@@ -91,7 +94,7 @@ def load_prefixes(filepath):
         >>> prefixes = load_prefixes(filename)
         >>> for uri_name, uri in prefixes[1]:
         ...     print(uri_name, uri)
-        ... 
+        ...
         owl: http://www.w3.org/2002/07/owl#
         xsd: http://www.w3.org/2001/XMLSchema#
         rdfs: http://www.w3.org/2000/01/rdf-schema#
