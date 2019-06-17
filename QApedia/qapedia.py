@@ -1,52 +1,74 @@
 """Realiza a geração de pares questão-sparql a partir de um arquivo de
 templates previamente estabelecido.
 
+Usage:
+------
+    $ qapedia [-h] [-tfile TFILE] [-o OUTPUT] [-d DELIMITER] [-n NUMBER] [-p PREFIXES] [-e ENDPOINT] [-l LANG] [-v VERBOSE]
+
+As opções disponíveis são:
+
+    -tfile             Qualquer caminho de string válido é aceito. A string pode ser
+                       uma URL, por exemplo. Esse caminho corresponde ao arquivo contendo
+                       o conjunto de templates. Se nenhum valor for passado, é executado
+                       um arquivo de exemplo.
+    -o, --output       Corresponde ao caminho do arquivo de saída onde será salvo os
+                       pares de questão-sparql gerados. Se nenhum caminho for especificado,
+                       o resultado será salvo no arquivo output.txt"
+    -h, --help         Mostra informações sobre os argumentos.
+    -d, --delimiter    Delimitador usado para separar os campos do template.
+                       (default: ";")
+    -n, --number       Quantidade de pares gerados por template. (default: 100)
+    -p, --prefixe      Caminho do arquivo txt contendo os prefixos utilizados, caso
+                       nenhum arquivo seja especificado são utilizados os mesmos prefixos
+                       presentes em http://dbpedia.org/snorql/
+    -e, --endpoint     URL do SPARQL endpoint.
+                       (default http://dbpedia.org/sparql)
+    -l, --lang         Idioma das questões do template. (default: 'pt')
+
 Examples:
 ---------
-    $ QApedia
-    $ QApedia -tfile templates.csv --lang PT
+::
+
+    $ qapedia templates.csv --lang PT
+    $ qapedia -h # exibe ajuda
 
 Contact:
 --------
-More information is available at:
-- https://qapedia.readthedocs.io/
-- https://github.com/QApedia/QApedia
+Mais informações estão disponíveis em:
+    - https://qapedia.readthedocs.io/
+    - https://github.com/QApedia/QApedia
 
 Version:
 --------
 - QApedia v0.2.0-alpha
-
 """
+
+__author__ = "Jessica Sousa"
+__version__ = "v0.2.0-alpha"
+__license__ = "MIT"
+
+
 # Standard library imports
 import os
 import argparse
 import csv
 
-# QApedia imports
-import QApedia
-from QApedia import io
-from QApedia import utils
-
-
 _ROOT = os.path.abspath(os.path.dirname(__file__))
 
 
-def get_data(path):
+def _get_data(path):
     return os.path.join(_ROOT, "data", path)
 
 
 def _make_parser():
-    p = argparse.ArgumentParser(
-        description=__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
+    p = argparse.ArgumentParser()
     p.add_argument(
         "-tfile",
         help="Qualquer caminho de string válido é aceito. A string pode ser "
         "uma URL, por exemplo. Esse caminho corresponde ao arquivo contendo "
         "o conjunto de templates. Se nenhum valor for passado, é executado "
         "um arquivo de exemplo.",
-        default=get_data("example.csv"),
+        default=_get_data("example.csv"),
     )
     p.add_argument(
         "-o",
@@ -76,7 +98,7 @@ def _make_parser():
         help="Caminho do arquivo txt contendo os prefixos utilizados, caso "
         "nenhum arquivo seja especificado são utilizados os mesmos prefixos"
         " presentes em http://dbpedia.org/snorql/",
-        default=get_data("prefixes.txt"),
+        default=_get_data("prefixes.txt"),
     )
     p.add_argument(
         "-e",
@@ -93,14 +115,18 @@ def _make_parser():
     p.add_argument(
         "-v",
         "--verbose",
-        help="Indica qual template está sendo " "executado atualmente.",
+        help="Indica qual template está sendo executado atualmente.",
         type=bool,
         default=False,
     )
     return p
 
 
-def main():
+def _run():
+    from QApedia import generator
+    from QApedia import io
+    from QApedia import utils
+
     parser = _make_parser()
     args = parser.parse_args()
 
@@ -117,7 +143,7 @@ def main():
             if args.verbose:
                 print("Executando template da linha %d" % index)
             # Realizar a busca e construção dos pares questão-sparql
-            pairs = QApedia.build_pairs_from_template(
+            pairs = generator.build_pairs_from_template(
                 template,
                 prefixes,
                 list_of_prefixes,
@@ -128,7 +154,3 @@ def main():
             for pair in pairs:
                 writer.writerow([pair["question"], pair["sparql"], str(index)])
         csv_file.close()
-
-
-if __name__ == "__main__":
-    main()
