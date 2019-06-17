@@ -3,15 +3,15 @@ import os
 import json
 
 FIXTURE_DIR = os.path.join(
-    os.path.dirname(os.path.realpath(__file__)),
-    'fixtures',
+    os.path.dirname(os.path.realpath(__file__)), "fixtures"
 )
 
 
 def load_adjust_generator_query_test_data():
     # Carregar json contendo os parâmetros do teste
-    test_data_path = os.path.join(FIXTURE_DIR,
-                                  'adjust_generator_query_test_data.json')
+    test_data_path = os.path.join(
+        FIXTURE_DIR, "adjust_generator_query_test_data.json"
+    )
     return json.load(open(test_data_path))
 
 
