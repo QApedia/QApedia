@@ -16,8 +16,6 @@ Version:
 --------
 - QApedia v0.2.0-alpha
 
-Arguments:
----------
 """
 # Standard library imports
 import os
@@ -130,6 +128,7 @@ def main():
             for pair in pairs:
                 writer.writerow([pair["question"], pair["sparql"], str(index)])
         csv_file.close()
+
 
 if __name__ == "__main__":
     main()

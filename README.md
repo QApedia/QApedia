@@ -29,7 +29,7 @@ O Download do projeto se encontra disponível na aba [release](https://github.co
 
 ## 📚 Documentação
 
-A documentação do ``QApedia`` se encontra disponível em [qapedia.rtfd.io](https://qapedia.readthedocs.io/pt/).
+A documentação do ``QApedia`` se encontra disponível em [qapedia.rtfd.io](https://qapedia.readthedocs.io/pt/latest/).
 
 Esse pacote contempla as seguintes operações:
 
