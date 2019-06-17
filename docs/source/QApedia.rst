@@ -20,6 +20,14 @@ QApedia.io module
     :undoc-members:
     :show-inheritance:
 
+QApedia.qapedia module
+----------------------
+
+.. automodule:: QApedia.qapedia
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 QApedia.utils module
 --------------------
 
