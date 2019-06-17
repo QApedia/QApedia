@@ -15,3 +15,5 @@ pytest >= 4.5.0
 
 # setup.py: 1
 setuptools >= 41.0.1
+
+numpydoc >= 0.9.1
