@@ -39,10 +39,9 @@ Mais informações estão disponíveis em:
     - https://github.com/QApedia/QApedia
 """
 
-from pkg_resources import get_distribution
 
 __author__ = "Jessica Sousa"
-__version__ = get_distribution('QApedia').version
+__version__ = "v0.2.0-alpha"
 __license__ = "MIT"
 
 
