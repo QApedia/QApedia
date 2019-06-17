@@ -7,20 +7,22 @@ Usage:
 
 As opções disponíveis são:
 
-    -tfile             Qualquer caminho de string válido é aceito. A string pode ser
-                       uma URL, por exemplo. Esse caminho corresponde ao arquivo contendo
-                       o conjunto de templates. Se nenhum valor for passado, é executado
-                       um arquivo de exemplo.
-    -o, --output       Corresponde ao caminho do arquivo de saída onde será salvo os
-                       pares de questão-sparql gerados. Se nenhum caminho for especificado,
-                       o resultado será salvo no arquivo output.txt"
+    -tfile             Qualquer caminho de string válido é aceito. A string
+                       pode ser uma URL, por exemplo. Esse caminho corresponde
+                       ao arquivo contendo o conjunto de templates. Se nenhum
+                       valor for passado, é executado um arquivo de exemplo.
+    -o, --output       Corresponde ao caminho do arquivo de saída onde será
+                       salvo os pares de questão-sparql gerados. Se nenhum
+                       caminho for especificado, o resultado será salvo no
+                       arquivo output.txt
     -h, --help         Mostra informações sobre os argumentos.
     -d, --delimiter    Delimitador usado para separar os campos do template.
                        (default: ";")
-    -n, --number       Quantidade de pares gerados por template. (default: 100)
-    -p, --prefixe      Caminho do arquivo txt contendo os prefixos utilizados, caso
-                       nenhum arquivo seja especificado são utilizados os mesmos prefixos
-                       presentes em http://dbpedia.org/snorql/
+    -n, --number       Quantidade de pares gerados por template.
+                       (default: 100)
+    -p, --prefixe      Caminho do arquivo txt contendo os prefixos utilizados,
+                       caso nenhum arquivo seja especificado são utilizados os
+                       mesmos prefixos presentes em http://dbpedia.org/snorql/
     -e, --endpoint     URL do SPARQL endpoint.
                        (default http://dbpedia.org/sparql)
     -l, --lang         Idioma das questões do template. (default: 'pt')
