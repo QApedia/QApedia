@@ -4,6 +4,14 @@ QApedia package
 Módulos
 ----------
 
+QApedia.qapedia module
+----------------------
+
+.. automodule:: QApedia.qapedia
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 QApedia.generator module
 ------------------------
 
@@ -16,14 +24,6 @@ QApedia.io module
 -----------------
 
 .. automodule:: QApedia.io
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-QApedia.qapedia module
-----------------------
-
-.. automodule:: QApedia.qapedia
     :members:
     :undoc-members:
     :show-inheritance:
