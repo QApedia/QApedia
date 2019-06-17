@@ -36,6 +36,6 @@ setup(name="QApedia",
       include_package_data=True,
       install_requires=["SPARQLWrapper", "pandas", "lxml"],
       tests_require=["pytest"],
-      entry_points={"console_scripts": ["qapedia=QApedia.__main__:main"]},
+      entry_points={"console_scripts": ["qapedia=QApedia.qapedia:_run"]},
       package_data={'QApedia': ['data/*']},
       zip_safe=False)

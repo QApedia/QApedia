@@ -37,21 +37,27 @@ Contact:
 Mais informações estão disponíveis em:
     - https://qapedia.readthedocs.io/
     - https://github.com/QApedia/QApedia
-
-Version:
---------
-- QApedia v0.2.0-alpha
 """
 
+from pkg_resources import get_distribution
+
 __author__ = "Jessica Sousa"
-__version__ = "v0.2.0-alpha"
+__version__ = get_distribution('QApedia').version
 __license__ = "MIT"
+
+
+__doc__ += f"""
+Version:
+--------
+- QApedia {__version__}
+"""
 
 
 # Standard library imports
 import os
 import argparse
 import csv
+
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
 

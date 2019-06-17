@@ -1,11 +1,7 @@
 # __init__.py
 from . import io
 from . import utils
-from .generator import *
 from . import generator
-
-# Version of the qapedia package
-__version__ = "0.2.0"
+from .qapedia import __version__, __author__, __license__
 
 __all__ = ["io", "utils"]
-__all__.extend(generator.__all__)
