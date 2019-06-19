@@ -16,7 +16,7 @@ As opções disponíveis são:
                        caminho for especificado, o resultado será salvo no
                        arquivo output.txt
     -h, --help         Mostra informações sobre os argumentos.
-    -d, --delimiter    Delimitador usado para separar os campos do template.
+    -d, --delim        Delimitador usado para separar os campos do template.
                        (default: ";")
     -n, --number       Quantidade de pares gerados por template.
                        (default: 100)
@@ -87,7 +87,7 @@ def _make_parser():
     )
     p.add_argument(
         "-d",
-        "--delimiter",
+        "--delim",
         help="Delimitador usado para separar os campos do template. "
         "(default: ';')",
         default=";",
@@ -144,7 +144,7 @@ def _run():
     templates = io.load_templates(args.tfile, args.delimiter)
 
     with open(args.output, "w") as csv_file:
-        writer = csv.writer(csv_file, delimiter=args.delimiter)
+        writer = csv.writer(csv_file, delimiter=args.delim)
         writer.writerow(["question", "sparql", "template_id"])
         for index, template in templates.iterrows():
             if args.verbose:

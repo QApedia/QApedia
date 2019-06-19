@@ -5,7 +5,7 @@ from os import path
 this_directory = path.abspath(path.dirname(__file__))
 
 # The text of the README file
-with open(path.join(this_directory, "README.md")) as fid:
+with open(path.join(this_directory, "README.md"), encoding="utf-8") as fid:
     README = fid.read()
 
 with open(path.join(this_directory, "LICENSE")) as f:

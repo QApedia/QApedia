@@ -164,7 +164,7 @@ def perform_query(query, prefixes="", endpoint="http://dbpedia.org/sparql"):
     query : str
         Sparql utilizada para realizar uma busca no endpoint
         especificado.
-    prefixes: str, optional
+    prefixes : str, optional
         Corresponde ao conjunto de prefixos utilizados na consulta SPARQL.
         Se não estiver usando prefixos, o uso desse parâmetro não é
         necessário, o valor padrão é "".
@@ -280,7 +280,7 @@ def extract_pairs(
     number_of_examples : int, optional
         Número de resultados a serem considerados para o template, o valor
         padrão é 500.
-    list_of_prefixes: list, optional
+    list_of_prefixes : list, optional
         Corresponde a lista de prefixos obtida através do método
         :func:`QApedia.utils.convert_prefixes_to_list`, onde os prefixos devem
         ser os mesmos que foram utilizados na função que gerou os bindings.

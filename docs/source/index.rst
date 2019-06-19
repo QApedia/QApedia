@@ -9,7 +9,14 @@
 
 O QApedia é uma ferramenta de geração de pares de questão-sparql escrito em
 Python a partir do endpoint previamente estabelecido. O seu nome vem da
-junção dos termos QA de *Question-Answering* e *pedia* da palavra wikipedia.
+junção dos termos QA de *Question-Answering* e *pedia* da palavra wikipedia. O
+repositório contendo o código fonte pode ser encontrado em `QApedia/QApedia`_
+e alguns exemplos estão disponíveis na pasta `exemplos_` do respectivo
+repositório.
+
+.. Links de Referências
+.. _QApedia/QApedia: https://github.com/QApedia/QApedia
+.. _exemplos: https://github.com/QApedia/QApedia/exemplos
 
 .. toctree::
    :maxdepth: 2

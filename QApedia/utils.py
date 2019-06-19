@@ -48,7 +48,7 @@ def extract_variables(generator_query):
 
     Returns
     -------
-    lst
+    list
         Lista contendo as variáveis a serem respondidas.
 
     Examples

@@ -22,7 +22,7 @@ primeiramente, dentro da pasta do projeto, você pode executar o
 ``pip install .``. 
 
 ```console
-    foo@bar:~/QApedia$ pip install .
+foo@bar:~/QApedia$ pip install .
 ```
 
 O Download do projeto se encontra disponível na aba [release](https://github.com/QApedia/QApedia/releases) do repositório atual nos formatos *tar.gz* e *zip*.
@@ -75,8 +75,7 @@ foo@bar:~$ qapedia -tfile templates.csv -n 10 -v True -o pares.csv
 Os testes do pacote foram construídos utilizando o pytest e é possível verificá-los executando os seguintes comandos dentro da pasta do QApedia. 
 
 ```console
-foo@bar:~/ pip install pytest
-foo@bar:~/ pytest --cov-report term --cov=QApedia tests/
+foo@bar:~/QApedia$ pip install pytest
+foo@bar:~/QApedia$ pytest
 ```
 
-Para a versão 0.1.0 é esperado que os testes passem com o total de 99%.
