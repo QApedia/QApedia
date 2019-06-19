@@ -7,7 +7,7 @@ def parser_test_data():
     test1 = (
         ["-n 20"],
         Namespace(
-            delimiter=";",
+            delim=";",
             endpoint="http://dbpedia.org/sparql",
             lang="pt",
             number=20,
@@ -21,7 +21,7 @@ def parser_test_data():
     test2 = (
         ["-n 10", "-opairs.csv"],
         Namespace(
-            delimiter=";",
+            delim=";",
             endpoint="http://dbpedia.org/sparql",
             lang="pt",
             number=10,
@@ -35,7 +35,7 @@ def parser_test_data():
     test3 = (
         [],
         Namespace(
-            delimiter=";",
+            delim=";",
             endpoint="http://dbpedia.org/sparql",
             lang="pt",
             number=100,

@@ -6,7 +6,7 @@
 [![codecov]( https://codecov.io/gh/QApedia/QApedia/branch/master/graph/badge.svg)](https://codecov.io/gh/QApedia/QApedia)
 [![Documentation Status](https://readthedocs.org/projects/qapedia/badge/?version=latest)](https://qapedia.readthedocs.io/pt/latest/?badge=latest)
 [![GitHub license](https://img.shields.io/github/license/QApedia/QApedia.svg)](https://github.com/QApedia/QApedia/blob/master/LICENSE)
-![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/QApedia/QApedia.svg)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/QApedia/QApedia/master?filepath=examples)
 
 
 O módulo ``QApedia`` foi desenvolvido em python e realiza a geração de pares de

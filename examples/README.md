@@ -3,10 +3,12 @@
 
 [![Documentation Status](https://readthedocs.org/projects/qapedia/badge/?version=latest)](https://qapedia.readthedocs.io/pt/latest/?badge=latest)
 [![GitHub license](https://img.shields.io/github/license/QApedia/QApedia.svg)](https://github.com/QApedia/QApedia/blob/master/LICENSE)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/QApedia/QApedia/master?filepath=examples)
 
 O módulo ``QApedia`` foi desenvolvido em python e realiza a geração de pares de
 questões-sparql com base em um template previamente estabelecido. Para saber
-mais sobre o funcionamento do pacote, você pode ler sobre ele na [documentação](https://qapedia.readthedocs.io/pt/latest/).
+mais sobre o funcionamento do pacote, você pode ler sobre ele na [documentação](https://qapedia.readthedocs.io/pt/latest/). Você pode executar os notebooks do exemplo de forma interativa
+através do [binder](https://mybinder.org/v2/gh/QApedia/QApedia/master?filepath=examples).
 
 Para exemplificar o uso da biblioteca, segue os tutoriais a seguir (gerados a partir de ipython notebooks):
 
