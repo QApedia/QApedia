@@ -69,3 +69,4 @@ html_logo = "_static/logo_white.png"
 
 def setup(app):
     app.add_javascript('copybutton.js')
+    app.add_css_file('custom.css')

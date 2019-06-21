@@ -4,7 +4,7 @@ templates previamente estabelecido.
 Usage:
 ------
     $ qapedia [-h] [-tfile TFILE] [-o OUTPUT] [-d DELIMITER] [-n NUMBER]
-[-p PREFIXES] [-e ENDPOINT] [-l LANG] [-v VERBOSE]
+    [-p PREFIXES] [-e ENDPOINT] [-l LANG] [-v VERBOSE]
 
 As opções disponíveis são:
 
@@ -32,7 +32,7 @@ Examples:
 ---------
 ::
 
-    $ qapedia templates.csv --lang PT
+    $ qapedia -tfile templates.csv --lang PT
     $ qapedia -h # exibe ajuda
 
 Contact:

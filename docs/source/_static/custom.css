@@ -1,0 +1,15 @@
+/* Sidebar header (and topbar for mobile) */
+.wy-side-nav-search, .wy-nav-top {
+    background: #0b750a;
+}
+
+ 
+.wy-nav-side {
+   background-image: url("texture.png");
+}
+
+.wy-menu-vertical a {
+    font-weight: bold;
+}
+
+
