@@ -9,9 +9,11 @@ python:
   - "nightly"  # nightly build
 
 matrix:
-  allow_failures:
-  - os: osx
-    language: generic
+    include:
+        - os: linux
+        # Use generic language for osx
+        - os: osx
+          language: generic
 
 # Perform the manual steps on osx to install python3 and activate venv
 before_install:
