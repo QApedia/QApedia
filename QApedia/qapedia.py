@@ -3,7 +3,8 @@ templates previamente estabelecido.
 
 Usage:
 ------
-    $ qapedia [-h] [-tfile TFILE] [-o OUTPUT] [-d DELIMITER] [-n NUMBER] [-p PREFIXES] [-e ENDPOINT] [-l LANG] [-v VERBOSE]
+    $ qapedia [-h] [-tfile TFILE] [-o OUTPUT] [-d DELIMITER] [-n NUMBER]
+[-p PREFIXES] [-e ENDPOINT] [-l LANG] [-v VERBOSE]
 
 As opções disponíveis são:
 
@@ -40,6 +41,10 @@ Mais informações estão disponíveis em:
     - https://qapedia.readthedocs.io/
     - https://github.com/QApedia/QApedia
 """
+# Standard library imports
+import os
+import argparse
+import csv
 
 
 __author__ = "Jessica Sousa"
@@ -52,12 +57,6 @@ Version:
 --------
 - QApedia {__version__}
 """
-
-
-# Standard library imports
-import os
-import argparse
-import csv
 
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))

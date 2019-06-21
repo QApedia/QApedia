@@ -31,7 +31,7 @@ __all__ = [
     "perform_query",
     "get_results_of_generator_query",
     "extract_pairs",
-    "build_pairs_from_template"
+    "build_pairs_from_template",
 ]
 
 
@@ -92,7 +92,7 @@ def _split_sparql(sparql_query):
         raise Exception("A query não possui formato SELECT ... WHERE{...}")
     else:
         second_split = sparql_query[first_bracket_pos:last_bracket_pos]
-        last_split = sparql_query[last_bracket_pos+1:]
+        last_split = sparql_query[last_bracket_pos + 1 :]
         return first_split[0], second_split, last_split
 
 
@@ -342,9 +342,14 @@ resource/Hunter_×_Hunter}'
     return pairs
 
 
-def build_pairs_from_template(template, prefixes="", list_of_prefixes=[],
-                              endpoint="http://dbpedia.org/sparql",
-                              number_of_examples=100, lang="pt"):
+def build_pairs_from_template(
+    template,
+    prefixes="",
+    list_of_prefixes=[],
+    endpoint="http://dbpedia.org/sparql",
+    number_of_examples=100,
+    lang="pt",
+):
     """Método responsável pela geração de pares questão-sparql com base
     em um template.
 
