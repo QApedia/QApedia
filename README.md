@@ -7,6 +7,7 @@
 [![Documentation Status](https://readthedocs.org/projects/qapedia/badge/?version=latest)](https://qapedia.readthedocs.io/pt/latest/?badge=latest)
 [![GitHub license](https://img.shields.io/github/license/QApedia/QApedia.svg)](https://github.com/QApedia/QApedia/blob/master/LICENSE)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/QApedia/QApedia/master?filepath=examples)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 
 
 O módulo ``QApedia`` foi desenvolvido em python e realiza a geração de pares de
