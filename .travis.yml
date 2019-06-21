@@ -7,6 +7,19 @@ python:
   - "3.7-dev"  # 3.7 development branch
   - "3.8-dev"  # 3.8 development branch
   - "nightly"  # nightly build
+
+matrix:
+  allow_failures:
+  - os: osx
+    language: generic
+
+# Perform the manual steps on osx to install python3 and activate venv
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install python3; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then virtualenv venv -p python3; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source venv/bin/activate; fi
+
 # command to install dependencies
 install:
   - pip install pytest

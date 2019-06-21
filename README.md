@@ -6,7 +6,6 @@
 [![Azure Pipelines](https://dev.azure.com/qapedia/QApedia/_apis/build/status/QApedia.QApedia?branchName=master)](https://dev.azure.com/qapedia/QApedia/_build/latest?definitionId=2&branchName=master)
 [![codecov]( https://codecov.io/gh/QApedia/QApedia/branch/master/graph/badge.svg)](https://codecov.io/gh/QApedia/QApedia)
 [![Documentation Status](https://readthedocs.org/projects/qapedia/badge/?version=latest)](https://qapedia.readthedocs.io/pt/latest/?badge=latest)
-[![GitHub license](https://img.shields.io/github/license/QApedia/QApedia.svg)](https://github.com/QApedia/QApedia/blob/master/LICENSE)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/QApedia/QApedia/master?filepath=examples)
 
