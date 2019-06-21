@@ -7,13 +7,5 @@ SPARQLWrapper >= 1.8.4
 # qapedia/io.py: 10
 pandas >= 0.24.2
 
-# tests/conftest.py: 1
-# tests/test_generator.py: 1
-# tests/test_io.py: 1
-# tests/test_utils.py: 1
-pytest >= 4.5.0
-
 # setup.py: 1
 setuptools >= 41.0.1
-
-numpydoc >= 0.9.1

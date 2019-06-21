@@ -9,6 +9,7 @@ python:
   - "nightly"  # nightly build
 # command to install dependencies
 install:
+  - pip install pytest
   - pip install -r requirements.txt
   - pip install codecov
   - pip install pytest-cov

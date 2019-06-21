@@ -22,7 +22,7 @@ copyright = '2019, Jessica Sousa'
 author = 'Jessica Sousa'
 
 # The full version, including alpha/beta/rc tags
-release = 'v0.2.0-alpha'
+release = 'v0.1.0-alpha'
 
 # The master toctree document.
 master_doc = 'index'

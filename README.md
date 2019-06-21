@@ -56,6 +56,8 @@ Para verificar as opções disponíveis no comando ``qapedia``, apenas coloque `
 foo@bar:~$ qapedia -tfile templates.csv -n 10 -v True -o pares.csv
 ```
 
+ Você pode encontrar alguns exemplos de uso do QApedia nesse [link](examples).
+
 ## 🚧 Informações importantes
 
 * Os pares gerados podem apresentar problemas de concordância. 

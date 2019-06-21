@@ -43,7 +43,7 @@ Mais informações estão disponíveis em:
 
 
 __author__ = "Jessica Sousa"
-__version__ = "v0.2.0-alpha"
+__version__ = "v0.1.0-alpha"
 __license__ = "MIT"
 
 

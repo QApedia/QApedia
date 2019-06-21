@@ -1,0 +1,6 @@
+question;query;generator_query
+<A> e <B> são produzidos por qual empresa?;SELECT DISTINCT ?uri where { <A> dbpedia2:manufacturer ?uri . <B> dbpedia2:manufacturer ?uri };select distinct ?a ?b where { ?a dbpedia2:manufacturer ?uri . ?b dbpedia2:manufacturer ?uri }
+<A> e <B> são os trabalhos notáveis de qual escritor(a)?;SELECT DISTINCT ?uri where { ?uri dbpedia2:notableworks <A> . ?uri dbpedia2:notableworks <B> . ?uri a dbo:writer };select distinct ?a ?b where { ?uri dbpedia2:notableworks ?a . ?uri dbpedia2:notableworks ?b . ?uri a dbo:writer }
+<A> e <B> são escritos por qual autor(a)?;SELECT DISTINCT ?uri where { <A> dbpedia2:writer ?uri . <B> dbo:author ?uri };select distinct ?a ?b where { ?a dbpedia2:writer ?uri . ?b dbo:author ?uri }
+<A> escreveu qual livro?;SELECT DISTINCT ?uri where { ?uri dbo:author <A> };select distinct ?a where { ?uri dbo:author ?a }
+<A> pertence a qual partido político?;SELECT DISTINCT ?uri where { <A> dbo:occupation ?uri };select distinct ?a where { ?a dbo:occupation ?uri }

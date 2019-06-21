@@ -1,0 +1,41 @@
+question;sparql;template_id
+Kosmos 634 e Kosmos 176 são produzidos por qual empresa?;SELECT DISTINCT ?uri where { dbpedia:Kosmos_634 dbpedia2:manufacturer ?uri . dbpedia:Kosmos_176 dbpedia2:manufacturer ?uri };0
+Nahuel 1A e Tele-X são produzidos por qual empresa?;SELECT DISTINCT ?uri where { dbpedia:Nahuel_1A dbpedia2:manufacturer ?uri . dbpedia:Tele-X dbpedia2:manufacturer ?uri };0
+Telstar 401 e JCSAT-110 são produzidos por qual empresa?;SELECT DISTINCT ?uri where { dbpedia:Telstar_401 dbpedia2:manufacturer ?uri . dbpedia:N-SAT-110 dbpedia2:manufacturer ?uri };0
+Kosmos 165 e Kosmos 314 são produzidos por qual empresa?;SELECT DISTINCT ?uri where { dbpedia:Kosmos_165 dbpedia2:manufacturer ?uri . dbpedia:Kosmos_314 dbpedia2:manufacturer ?uri };0
+Skynet 5A e Alphasat são produzidos por qual empresa?;SELECT DISTINCT ?uri where { dbpedia:Skynet_5A dbpedia2:manufacturer ?uri . dbpedia:Inmarsat-4A_F4 dbpedia2:manufacturer ?uri };0
+DirecTV-14 e SES-5 são produzidos por qual empresa?;SELECT DISTINCT ?uri where { dbpedia:DirecTV-14 dbpedia2:manufacturer ?uri . dbpedia:SES-5 dbpedia2:manufacturer ?uri };0
+Kosmos 76 e Kosmos 311 são produzidos por qual empresa?;SELECT DISTINCT ?uri where { dbpedia:Kosmos_76 dbpedia2:manufacturer ?uri . dbpedia:Kosmos_311 dbpedia2:manufacturer ?uri };0
+Kosmos 580 e Kosmos 265 são produzidos por qual empresa?;SELECT DISTINCT ?uri where { dbpedia:Kosmos_580 dbpedia2:manufacturer ?uri . dbpedia:Kosmos_265 dbpedia2:manufacturer ?uri };0
+Ariel 5 e COBE são produzidos por qual empresa?;SELECT DISTINCT ?uri where { dbpedia:Ariel_5 dbpedia2:manufacturer ?uri . dbpedia:Cosmic_Background_Explorer dbpedia2:manufacturer ?uri };0
+Kosmos 173 e Kosmos 311 são produzidos por qual empresa?;SELECT DISTINCT ?uri where { dbpedia:Kosmos_173 dbpedia2:manufacturer ?uri . dbpedia:Kosmos_311 dbpedia2:manufacturer ?uri };0
+Madonna (álbum) e The English Roses são escritos por qual autor(a)?;SELECT DISTINCT ?uri where { dbpedia:Madonna_(Madonna_album) dbpedia2:writer ?uri . dbpedia:The_English_Roses dbo:author ?uri };2
+Italia (álbum) e Lolita, My Love são escritos por qual autor(a)?;SELECT DISTINCT ?uri where { dbpedia:Italia_(album) dbpedia2:writer ?uri . dbpedia:Lolita,_My_Love dbo:author ?uri };2
+Mathlete's Feat e F Is for Family são escritos por qual autor(a)?;SELECT DISTINCT ?uri where { dbpedia:Mathlete's_Feat dbpedia2:writer ?uri . dbpedia:F_Is_for_Family dbo:author ?uri };2
+E Pluribus Wiggum e F Is for Family são escritos por qual autor(a)?;SELECT DISTINCT ?uri where { dbpedia:E_Pluribus_Wiggum dbpedia2:writer ?uri . dbpedia:F_Is_for_Family dbo:author ?uri };2
+Intimate and Live e Kylie: La La La são escritos por qual autor(a)?;SELECT DISTINCT ?uri where { dbpedia:Intimate_and_Live_(album) dbpedia2:writer ?uri . dbpedia:Kylie:_La_La_La dbo:author ?uri };2
+Born Sinner e The 50th Law são escritos por qual autor(a)?;SELECT DISTINCT ?uri where { dbpedia:Born_Sinner dbpedia2:writer ?uri . dbpedia:The_50th_Law dbo:author ?uri };2
+The Snowmen e Coupling são escritos por qual autor(a)?;SELECT DISTINCT ?uri where { dbpedia:The_Snowmen dbpedia2:writer ?uri . dbpedia:Coupling_(UK_TV_series) dbo:author ?uri };2
+Coast to Coast (álbum de Westlife) e Kristina från Duvemåla são escritos por qual autor(a)?;SELECT DISTINCT ?uri where { dbpedia:Coast_to_Coast_(Westlife_album) dbpedia2:writer ?uri . dbpedia:Kristina_från_Duvemåla dbo:author ?uri };2
+Simpsoncalifragilisticexpiala(Annoyed Grunt)cious e Ice Age: A Mammoth Christmas são escritos por qual autor(a)?;SELECT DISTINCT ?uri where { dbpedia:Simpsoncalifragilisticexpiala(Annoyed_Grunt)cious dbpedia2:writer ?uri . dbpedia:Ice_Age:_A_Mammoth_Christmas dbo:author ?uri };2
+Uptown Special e As Incríveis Aventuras de Kavalier & Clay são escritos por qual autor(a)?;SELECT DISTINCT ?uri where { dbpedia:Uptown_Special dbpedia2:writer ?uri . dbpedia:The_Amazing_Adventures_of_Kavalier_&_Clay dbo:author ?uri };2
+Gonzo (empresa) escreveu qual livro?;SELECT DISTINCT ?uri where { ?uri dbo:author dbpedia:Gonzo_(company) };3
+Universidade Tecnológica de Eindhoven escreveu qual livro?;SELECT DISTINCT ?uri where { ?uri dbo:author dbpedia:Eindhoven_University_of_Technology };3
+David H. Ahl escreveu qual livro?;SELECT DISTINCT ?uri where { ?uri dbo:author dbpedia:David_H._Ahl };3
+Hilary McKay escreveu qual livro?;SELECT DISTINCT ?uri where { ?uri dbo:author dbpedia:Hilary_McKay };3
+Henry Pettitt escreveu qual livro?;SELECT DISTINCT ?uri where { ?uri dbo:author dbpedia:Henry_Pettitt };3
+Jaan Kaplinski escreveu qual livro?;SELECT DISTINCT ?uri where { ?uri dbo:author dbpedia:Jaan_Kaplinski };3
+Alexandra Ripley escreveu qual livro?;SELECT DISTINCT ?uri where { ?uri dbo:author dbpedia:Alexandra_Ripley };3
+Giuseppe Arcimboldo escreveu qual livro?;SELECT DISTINCT ?uri where { ?uri dbo:author dbpedia:Giuseppe_Arcimboldo };3
+Simon Schama escreveu qual livro?;SELECT DISTINCT ?uri where { ?uri dbo:author dbpedia:Simon_Schama };3
+Lady Gaga escreveu qual livro?;SELECT DISTINCT ?uri where { ?uri dbo:author dbpedia:Lady_Gaga };3
+Francisco Xavier do Amaral pertence a qual partido político?;SELECT DISTINCT ?uri where { dbpedia:Francisco_Xavier_do_Amaral dbo:occupation ?uri };4
+Leslie Mann pertence a qual partido político?;SELECT DISTINCT ?uri where { dbpedia:Leslie_Mann dbo:occupation ?uri };4
+Michael Imperioli pertence a qual partido político?;SELECT DISTINCT ?uri where { dbpedia:Michael_Imperioli dbo:occupation ?uri };4
+Francesco Melzi pertence a qual partido político?;SELECT DISTINCT ?uri where { dbpedia:Francesco_Melzi dbo:occupation ?uri };4
+Carlos Eugenio Restrepo pertence a qual partido político?;SELECT DISTINCT ?uri where { dbpedia:Carlos_Eugenio_Restrepo dbo:occupation ?uri };4
+Carolina Márquez pertence a qual partido político?;SELECT DISTINCT ?uri where { dbpedia:Carolina_Márquez dbo:occupation ?uri };4
+Michael Rosenbaum pertence a qual partido político?;SELECT DISTINCT ?uri where { dbpedia:Michael_Rosenbaum dbo:occupation ?uri };4
+Medeiros e Albuquerque pertence a qual partido político?;SELECT DISTINCT ?uri where { dbpedia:Medeiros_e_Albuquerque dbo:occupation ?uri };4
+Dia (cantora) pertence a qual partido político?;SELECT DISTINCT ?uri where { dbpedia:Dia_(singer) dbo:occupation ?uri };4
+Nobuhiko Okamoto pertence a qual partido político?;SELECT DISTINCT ?uri where { dbpedia:Nobuhiko_Okamoto dbo:occupation ?uri };4
