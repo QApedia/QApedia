@@ -129,8 +129,8 @@ Para a geração dos pares de questão-sparql, utilizamos a função
     ----
 
 Caso deseje substituir alguns símbolos da ``sparql`` por elementos textuais,
-você pode fazer isso através da função ``encode``, para retornar a um formato
-válido novamente, basta utilizar o ``decode``.
+você pode fazer isso através da função ``encode``. Para retornar as sparqls em
+um formato válido, basta utilizar o ``decode``.
 
 .. code-block:: python
 

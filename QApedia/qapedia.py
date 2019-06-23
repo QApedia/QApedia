@@ -18,7 +18,7 @@ As opções disponíveis são:
                        arquivo output.txt
     -h, --help         Mostra informações sobre os argumentos.
     -d, --delim        Delimitador usado para separar os campos do template.
-                       (default: ";")
+                       (default: ';')
     -n, --number       Quantidade de pares gerados por template.
                        (default: 100)
     -p, --prefixe      Caminho do arquivo txt contendo os prefixos utilizados,
@@ -48,7 +48,7 @@ import csv
 
 
 __author__ = "Jessica Sousa"
-__version__ = "v0.1.0-alpha"
+__version__ = "v0.0.0-alpha"
 __license__ = "MIT"
 
 
@@ -131,7 +131,6 @@ def _make_parser():
 def _run():
     from QApedia import generator
     from QApedia import io
-    from QApedia import utils
 
     parser = _make_parser()
     args = parser.parse_args()

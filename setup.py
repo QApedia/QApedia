@@ -12,14 +12,14 @@ with open(path.join(this_directory, "LICENSE")) as f:
     license = f.read()
 
 setup(
-    name="QApedia",
-    version="v0.2.0-alpha",
+    name="QA-pedia",
+    version="v0.0.0-alpha",
     description="Geração de pares questão-sparql",
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/QApedia/QApedia",
-    author="Jessica Sousa",
-    author_email="jessicasousa.pc@gmail.com",
+    author="Ivan Pereira, Jessica Sousa",
+    author_email="navi1921@gmail.com, jessicasousa.pc@gmail.com",
     license="MIT",
     classifiers=[
         "Environment :: Console",

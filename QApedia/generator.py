@@ -23,7 +23,6 @@ import re
 from random import shuffle
 from SPARQLWrapper import SPARQLWrapper2, SPARQLExceptions, SmartWrapper
 from urllib.error import HTTPError
-from QApedia import utils
 from os.path import basename
 
 __all__ = [
@@ -76,6 +75,9 @@ def _extract_bindings(result):
 
 
 def _split_sparql(sparql_query):
+    """Método auxiliar utilizado em ``perform_query`` que tem como objetivo
+    dividir a sparql em três partes, além de verificar se é uma SPARQL válida.
+    """
     pattern = r"select(.*)\s*where"
     first_split = re.findall(pattern, sparql_query, re.IGNORECASE)
     first_bracket_pos = sparql_query.find("{") + 1
@@ -92,12 +94,12 @@ def _split_sparql(sparql_query):
         raise Exception("A query não possui formato SELECT ... WHERE{...}")
     else:
         second_split = sparql_query[first_bracket_pos:last_bracket_pos]
-        last_split = sparql_query[last_bracket_pos + 1 :]
+        last_split = sparql_query[(last_bracket_pos + 1) :]
         return first_split[0], second_split, last_split
 
 
 def adjust_generator_query(generator_query, variables, lang="pt"):
-    """Dada uma ```generator_query``` é retornada uma versão contendo
+    """Dada uma ``generator_query`` é retornada uma versão contendo
     os labels que são utilizados para preencher as lacunas presentes na
     pergunta.
 
@@ -110,7 +112,7 @@ def adjust_generator_query(generator_query, variables, lang="pt"):
         questão-sparql.
     lang : str, optional
         Idioma do campo ``rdfs:label`` adicionado na
-        ``generator_query``. O valor padrão é "pt".
+        ``generator_query``. O valor padrão é 'pt'.
 
     Returns
     -------
@@ -167,7 +169,7 @@ def perform_query(query, prefixes="", endpoint="http://dbpedia.org/sparql"):
     prefixes : str, optional
         Corresponde ao conjunto de prefixos utilizados na consulta SPARQL.
         Se não estiver usando prefixos, o uso desse parâmetro não é
-        necessário, o valor padrão é "".
+        necessário, o valor padrão é ''.
     endpoint : str, optional
         Indica endpoint utilizado, o valor default é
         ``http://dbpedia.org/sparql``
@@ -239,12 +241,12 @@ def get_results_of_generator_query(
     prefixes: str, optional
         Corresponde ao conjunto de prefixos utilizados na consulta SPARQL.
         Se não estiver usando prefixos, o uso desse parâmetro não é
-        necessário, o valor padrão é "".
+        necessário, o valor padrão é ''.
     endpoint : str, optional
-        Indica endpoint utilizado., by default "http://dbpedia.org/sparql"
+        Indica endpoint utilizado., by default 'http://dbpedia.org/sparql'
     lang : str, optional
        Idioma do campo ``rdfs:label`` adicionado na
-       ``generator_query``. O valor padrão é "pt".
+       ``generator_query``. O valor padrão é 'pt'.
 
     Returns
     -------
@@ -360,7 +362,7 @@ def build_pairs_from_template(
         ``generator_query`` e ``variables``.
     prefixes : str, optional
         Consiste em uma string contendo os prefixos utilizados pela SPARQL.
-    list_of_prefixes : list of tuple of str, optional, by default ""
+    list_of_prefixes : list of tuple of str, optional, by default ''
         Lista contendo os prefixos transformados pelo método
         :func:`QApedia.utils.convert_prefixes_to_list`, by default []
     endpoint : str, optional
@@ -369,7 +371,7 @@ def build_pairs_from_template(
     number_of_examples : int, optional
         Quantidade máxima de pares gerados por template, by default 100
     lang : str, optional
-        Idioma utilizado na pergunta do template, by default "pt"
+        Idioma utilizado na pergunta do template, by default 'pt'
 
     Returns
     -------

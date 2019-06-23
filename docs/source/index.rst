@@ -16,7 +16,7 @@ repositório.
 
 .. Links de Referências
 .. _QApedia/QApedia: https://github.com/QApedia/QApedia
-.. _exemplos: https://github.com/QApedia/QApedia/exemplos
+.. _exemplos: https://github.com/QApedia/QApedia/tree/master/examples
 
 .. toctree::
    :maxdepth: 2

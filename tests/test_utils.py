@@ -39,7 +39,7 @@ def test_convert_prefixes_to_list():
 
 
 def test_encode():
-    # Testa se a query possui algum de seus símbolos substituídos por textos
+    # Testa se a query é codificada corretamenta pelo encode
     sparql = "SELECT DISTINCT(?a) ?b WHERE { ?a dbo:location ?b }"
     prefixes = [("dbo:", "http://dbpedia.org/ontology/")]
     expected = (

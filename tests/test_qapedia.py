@@ -50,6 +50,7 @@ def parser_test_data():
 
 
 def test_parser_argument_error():
+    # Testar a passagem inválida de argumentos
     parser = qapedia._make_parser()
     with pytest.raises(SystemExit):
         parser.parse_args(["-file", ""])

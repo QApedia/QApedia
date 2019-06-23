@@ -110,7 +110,7 @@ def extract_pairs_test_data():
         },
         # Manga 3
         {
-            "a": Value("http://dbpedia.org/resource/" "We_Were_There_(manga)"),
+            "a": Value("http://dbpedia.org/resource/We_Were_There_(manga)"),
             "la": Value("Bokura ga Ita"),
         },
         # Manga 4
@@ -161,6 +161,7 @@ def test_adjust_generator_query(adjust_generator_query_example):
 
 
 def generator_query_failure_data():
+    # Testar se query não está no formato SELECT ... WHERE
     test1 = (
         "select where ?a dbo:author dbr:Yoshihiro_Togashi}",
         ["a"],
@@ -196,7 +197,6 @@ def test_perform_query(query, endpoint, expected):
     "query, endpoint, expected", perform_query_test_failure_data()
 )
 def test_perform_query_failure(query, endpoint, expected):
-    query = "ask where{ a dbo:author dbr:Yoshihiro_Togashi}"
     with pytest.raises(Exception, match=expected):
         QApedia.generator.perform_query(query, endpoint=endpoint)
 
@@ -243,4 +243,12 @@ def test_build_pairs_from_template(
 ):
     assert (
         type(QApedia.generator.build_pairs_from_template(template)) == expected
+    )
+
+
+def test_perform_query_endpoint_error():
+    query = "SomeString"
+    endpoint = "http://collection.britishmuseum.org/sparql"
+    assert (
+        type(QApedia.generator.perform_query(query, endpoint=endpoint)) == list
     )
