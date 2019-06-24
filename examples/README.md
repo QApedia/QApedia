@@ -9,8 +9,8 @@ mais sobre o funcionamento do pacote, você pode ler sobre ele na [documentaçã
 
 Para exemplificar o uso da biblioteca, segue os tutoriais a seguir (gerados a partir de ipython notebooks):
 
-* [Realizando consultas sparql com o qapedia](consultas_sparql.html).
-* [Definindo um template para geração de pares questão-sparql](templates_pares.html).
+* [Realizando consultas sparql com o qapedia](https://qapedia.github.io/QApedia/examples/consultas_sparql.html).
+* [Definindo um template para geração de pares questão-sparql](https://qapedia.github.io/QApedia/examples/templates_pares.html).
 
 
 Os notebooks dos exemplos anteriores podem ser executados de forma interativa
