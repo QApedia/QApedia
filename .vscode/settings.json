@@ -1,10 +1,10 @@
 {
-    "python.testing.pyTestArgs": [
-        "tests"
+    "python.testing.pytestArgs": [
+        "."
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
-    "python.testing.pyTestEnabled": true,
+    "python.testing.pytestEnabled": true,
     "restructuredtext.confPath": "",
     "python.pythonPath": "/home/jeca/miniconda3/envs/QApedia/bin/python"
 }

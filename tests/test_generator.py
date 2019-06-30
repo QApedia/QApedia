@@ -66,7 +66,7 @@ def perform_query_test_data():
     test4 = (
         "ASK WHERE { ?author ?label 'Yoshihiro Togashi'@pt ."
         "wd:Q696071 wdt:P50 ?author .}",
-        "https://query.wikidata.org/sparql",
+        "https://query.wikidata.org/bigdata/namespace/wdq/sparql",
         bool,
     )
     # Testando cláusula DESCRIBE.
