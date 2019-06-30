@@ -62,7 +62,7 @@ def load_templates(filepath, delimiter=";"):
     def get_variables(row):
         return extract_variables(row["generator_query"])
 
-    templates = pd.read_csv(filepath, sep=";")
+    templates = pd.read_csv(filepath, sep=delimiter)
     templates["variables"] = templates.apply(get_variables, axis=1)
     return templates
 
