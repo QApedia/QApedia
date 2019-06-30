@@ -139,7 +139,7 @@ def _run():
     prefixes, list_of_prefixes = io.load_prefixes(args.prefixes)
 
     # Carregar arquivo contendo os templates
-    templates = io.load_templates(args.tfile, args.delimiter)
+    templates = io.load_templates(args.tfile, args.delim)
 
     with open(args.output, "w") as csv_file:
         writer = csv.writer(csv_file, delimiter=args.delim)
