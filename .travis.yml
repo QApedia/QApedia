@@ -17,7 +17,6 @@ install:
 # command to run tests
 script:
   - pytest
-  - pytest --cov-report term --cov=QApedia tests/
 
 # Push the results back to codecov
 after_success:
