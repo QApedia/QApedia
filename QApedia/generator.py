@@ -214,7 +214,11 @@ def perform_query(query, prefixes="", endpoint="http://dbpedia.org/sparql"):
     try:
         result = sparql.queryAndConvert()
         result = _extract_bindings(result)
-    except (HTTPError, SPARQLExceptions.EndPointInternalError):
+    except (
+        HTTPError,
+        SPARQLExceptions.EndPointInternalError,
+        SPARQLExceptions.EndPointNotFound,
+    ):
         result = []
     except Exception as e:
         raise e

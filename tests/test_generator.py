@@ -59,14 +59,14 @@ def perform_query_test_data():
         "		bd:serviceParam wikibase:language 'en' ."
         "	}"
         "}",
-        "https://query.wikidata.org/bigdata/namespace/wdq/sparql",
+        "https://query.wikidata.org/sparql",
         list,
     )
     # Togashi escreveu Hunter x Hunter?
     test4 = (
         "ASK WHERE { ?author ?label 'Yoshihiro Togashi'@pt ."
         "wd:Q696071 wdt:P50 ?author .}",
-        "https://query.wikidata.org/bigdata/namespace/wdq/sparql",
+        "https://query.wikidata.org/sparql",
         bool,
     )
     # Testando cláusula DESCRIBE.
