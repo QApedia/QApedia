@@ -1,8 +1,12 @@
 Geração de pares
 ------------------
 A principal funcionalidade do pacote reside na geração de pares de
-questão-sparql a partir de um template previamente estabelecido, vamos definir
-um template inicial que retorna poucos resultados para critério de compreensão.
+questão-sparql a partir de um template previamente estabelecido. Inicialmente,
+suponha que temos o seguinte template. Neste template desejamos construir uma
+lista de perguntas que contenha as obras do autor Yoshihiro Togashi.
+
+Uma das perguntas possíveis seria:
+"Yoshihiro Togashi é autor de Hunter × Hunter"?
 
 +---------------------+----------------------+----------------------+
 | question            | query                | generator_query      |
@@ -18,7 +22,7 @@ um template inicial que retorna poucos resultados para critério de compreensão
 Realizando a consulta
 '''''''''''''''''''''
 
-Esse template é utilizado no formato de dicionário, onde cada chave corresponde
+Esse template é definido como um dicionário, onde cada chave corresponde
 ao nome da coluna, a chave *variables* corresponde as variáveis do tipo
 ``?letra`` localizadas entre *select* e o *where* da ``generator_query``.
 
@@ -42,7 +46,7 @@ Para isso, realizamos a chamada da função de ajuste da ``generator_query``:
     >>> print(gquery)
     select distinct ?a ?la where {?a rdfs:label ?la. FILTER(lang(?la) = 'pt').  ?a dbo:author dbr:Yoshihiro_Togashi }
 
-Em seguida, pode ser utilizada a função de busca ``perform_query`` para
+Em seguida, utilizamos a função de busca ``perform_query`` para
 realizar essa consulta. A consulta é realizada sobre a base da DBpedia, então
 não precisamos mudar valor padrão da função
 ``endpoint="http://dbpedia.org/sparql"``.
@@ -58,7 +62,7 @@ não precisamos mudar valor padrão da função
     Yu Yu Hakusho: http://dbpedia.org/resource/Yu_Yu_Hakusho
     Hunter × Hunter: http://dbpedia.org/resource/Hunter_×_Hunter
 
-Outra forma de obter os resultados direto sobre a ``generator_query`` é
+Outra forma de obter os resultados a partir da ``generator_query`` é
 utilizando o método ``get_results_of_generator_query``.
 
 .. code-block:: python
@@ -129,8 +133,8 @@ Para a geração dos pares de questão-sparql, utilizamos a função
     ----
 
 Caso deseje substituir alguns símbolos da ``sparql`` por elementos textuais,
-você pode fazer isso através da função ``encode``. Para retornar as sparqls em
-um formato válido, basta utilizar o ``decode``.
+você pode fazer isso através da função ``encode``. Para retornar a sparql em
+um formato válido, basta utilizar o método ``decode``.
 
 .. code-block:: python
 

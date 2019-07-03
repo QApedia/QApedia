@@ -15,7 +15,7 @@ def generator_query_test_data():
     )
     # selecionar lista de mangás escritas por Yoshihiro Togashi
     test2 = (
-        "select ?a " "where{ " "?a dbo:author dbr:Yoshihiro_Togashi" "}",
+        "select ?a where{ ?a dbo:author dbr:Yoshihiro_Togashi}",
         [],
         list,
         True,

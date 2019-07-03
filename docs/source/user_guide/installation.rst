@@ -4,40 +4,31 @@ Instalação
 ----------
 
 A priori, para se utilizar o pacote do QApedia é necessário realizar a
-instalação do mesmo. Esta pode ser executada através de dois modos:
+instalação do mesmo. A instalação pode ser executada de dois modos:
 
-Através das releases
-''''''''''''''''''''
+Através das releases disponíveis no Github
+'''''''''''''''''''''''''''''''''''''''''''
 
-Em `Releases`_ o download do código pode ser realizado através do zip ou
-tar.gz. No terminal, para realizar a instalação, pode ser executar as
-seguintes instruções:
+Em `Releases`_ há a versão compactada .zip e .tar.gz do código. No terminal,
+caso escolha o formato .tar.gz, no ubuntu, podem ser realizadas as seguintes
+operações:
 
 .. code-block:: console
 
-    foo@bar:~$ wget https://github.com/JessicaSousa/QApedia/archive/0.1.0.tar.gz
-    foo@bar:~$ tar -xvzf 0.1.0.tar.gz
-    foo@bar:~$ cd QApedia-0.1.0/
-    foo@bar:~/QApedia-0.1.0$ pip install .
+    foo@bar:~$ wget https://github.com/QApedia/QApedia/archive/0.2.2.tar.gz
+    foo@bar:~$ tar -xvzf 0.2.2.tar.gz
+    foo@bar:~$ cd QApedia-0.2.2/
+    foo@bar:~/QApedia-0.2.2$ pip install .
 
 Através do github
 '''''''''''''''''
 
-Você pode pode realizar git clone no repositório e instalar usando os
-comandos a seguir.
+É possível instalar a versão mais atual disponível no Github através do
+seguinte comando em seu terminal. É necessário possuir o _git_ instalado.
 
 .. code-block:: console
 
-    foo@bar:~$ pip install git+https://github.com/JessicaSousa/QApedia.git
+    foo@bar:~$ pip install git+https://github.com/QApedia/QApedia.git
 
 
-Através do Python packages
-''''''''''''''''''''''''''
-
-QApedia também está disponível no PyPI e pode ser instalado usando o pip.
-
-.. code-block:: sh
-
-   pip install QA-pedia
-
-.. _Releases: https://github.com/JessicaSousa/QApedia/releases
+.. _Releases: https://github.com/QApedia/QApedia/releases
